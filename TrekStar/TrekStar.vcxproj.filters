@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{6d74a8b7-bac1-4f4b-af94-7d23f5fec4e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Project">
+      <UniqueIdentifier>{39e0cd09-3ada-4ee8-b268-0a8141f8b64b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Project">
+      <UniqueIdentifier>{05bc85af-45f6-4e22-bbbb-988fdef57de1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -60,6 +66,9 @@
     <ClCompile Include="Util.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Project.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BluRay.h">
@@ -94,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Project.h">
+      <Filter>Header Files\Project</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

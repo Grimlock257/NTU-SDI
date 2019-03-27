@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream> 
 
 #include "BluRay.h"
 #include "ComboBox.h"
@@ -7,6 +8,7 @@
 #include "VHS.h"
 
 #include "UserInput.h"
+#include "Project.h"
 
 using namespace std;
 
@@ -18,13 +20,17 @@ ComboBox createCombo();
 DoubleSidedDVD createDoubleDVD();
 SingleSidedDVD createSingleDVD();
 VHS createVHS();
+void createProject();
 
 int main() {
+	// Everything in this main function is purely for testing
 	BluRay myBluRay(10, "First Film", "mp4", "DTS", "2 hours, 34 minutes", "English", "£29.99", "English", "16:9", PackagingMaterial::PLASTIC, vector<string>(), vector<string>(), vector<string>());
 	myBluRay.print();
 
-	// This function is just to test
-	createMaterial();
+	cout << "\n\n";
+
+	// createMaterial();
+	createProject();
 
 	// Keep window open
 	cin.get();
@@ -138,4 +144,31 @@ VHS createVHS() {
 	VHS vhs(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 
 	return vhs;
+}
+
+void createProject() {
+	ofstream outProjectFile;
+
+	outProjectFile.open("ProjectFile.txt", ios::app);
+
+	string projectTitle = UserInput::get_string_input("Enter project title:");
+	string projectSummary = UserInput::get_string_input("Enter project summary:");;
+	string projectGenre = UserInput::get_string_input("Enter project genre:");
+	string projectDateRelease = UserInput::get_string_input("Enter release date:");
+	string projectFilmingLoc = UserInput::get_string_input("Enter filming location:");
+	string projectLanguage = UserInput::get_string_input("Enter language:");
+	int projectRuntime = UserInput::get_integer_input("Enter runtime:");
+	string projectKeywords = UserInput::get_string_input("Enter keyword:");
+	double projectTicketSale = UserInput::get_double_input("Enter ticket sales:");
+	string projectStatus = UserInput::get_string_input("Enter status:");
+
+	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
+	Project newProject(1, projectTitle, projectSummary, projectGenre, projectDateRelease, projectFilmingLoc, projectLanguage, projectRuntime, projectKeywords, projectTicketSale, projectStatus);
+
+	outProjectFile << newProject.get_projectTitle() << "; " << newProject.get_projectSummary() << "; " << newProject.get_projectGenre() << "; " << newProject.get_projectDateRelease() << "; " << newProject.get_projectFilmingLoc() << "; " << newProject.get_projectLanguage() << "; " << newProject.get_projectRuntime() << "; " << newProject.get_projectKeywords() << "; " << newProject.get_projectTicketSale() << "; " << newProject.get_projectStatus() << ";\n" << endl;
+	cout << "The data has been stored...";
+
+	outProjectFile.close();
+	cout << "\n";
+	system("PAUSE");
 }

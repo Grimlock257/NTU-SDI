@@ -122,6 +122,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Packaging.cpp" />
+    <ClCompile Include="Project.cpp" />
     <ClCompile Include="SingleSidedDVD.cpp" />
     <ClCompile Include="UserInput.cpp" />
     <ClCompile Include="Util.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Packaging.h" />
     <ClInclude Include="PackagingMaterial.h" />
+    <ClInclude Include="Project.h" />
     <ClInclude Include="SingleSidedDVD.h" />
     <ClInclude Include="UserInput.h" />
     <ClInclude Include="Util.h" />
