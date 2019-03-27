@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Project">
       <UniqueIdentifier>{05bc85af-45f6-4e22-bbbb-988fdef57de1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Crew">
+      <UniqueIdentifier>{12ba7a65-54dd-4ae5-98aa-a3f2d86d9434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Crew">
+      <UniqueIdentifier>{001c5fe3-70bf-4d30-abb9-870a5a050940}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -69,6 +75,9 @@
     <ClCompile Include="Project.cpp">
       <Filter>Source Files\Project</Filter>
     </ClCompile>
+    <ClCompile Include="Crew.cpp">
+      <Filter>Source Files\Crew</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BluRay.h">
@@ -106,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="Project.h">
       <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Crew.h">
+      <Filter>Header Files\Crew</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

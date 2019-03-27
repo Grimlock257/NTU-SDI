@@ -9,10 +9,9 @@
 
 #include "UserInput.h"
 #include "Project.h"
+#include "Crew.h"
 
 using namespace std;
-
-void createMaterial();
 
 // Testing functions declarations
 BluRay createBluRay();
@@ -20,7 +19,9 @@ ComboBox createCombo();
 DoubleSidedDVD createDoubleDVD();
 SingleSidedDVD createSingleDVD();
 VHS createVHS();
+void createMaterial();
 void createProject();
+void createCrew();
 
 int main() {
 	// Everything in this main function is purely for testing
@@ -31,6 +32,7 @@ int main() {
 
 	// createMaterial();
 	createProject();
+	// createCrew();
 
 	// Keep window open
 	cin.get();
@@ -170,5 +172,42 @@ void createProject() {
 
 	outProjectFile.close();
 	cout << "\n";
+	system("PAUSE");
+}
+
+void createCrew() {
+	ofstream outCrewFile;
+	outCrewFile.open("crewFile.txt", ios::app);
+
+	string producer = UserInput::get_string_input("Enter Producer's name:");
+	string director = UserInput::get_string_input("Enter Director's name:");
+	string writer = UserInput::get_string_input("Enter Writer's name:");
+	string editor = UserInput::get_string_input("Enter Editor's name:");
+	string prodDesign = UserInput::get_string_input("Enter Production Designer's name:");
+	string setDeco = UserInput::get_string_input("Enter Set Decorator's name:");
+	string customeDesign = UserInput::get_string_input("Enter Costume Designer's name:");
+	int numCast = UserInput::get_integer_input("Enter number of Actors and Actresses in Film:");
+
+	string *cast = new string[numCast];
+
+	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
+	Crew crew(1, producer, director, writer, numCast, editor, prodDesign, setDeco, customeDesign);
+
+	for (int i = 0; i < numCast; i++) {
+		cout << "Enter Actor's or Actress's name:";
+		cin >> cast[i];
+	}
+
+	outCrewFile << crew.get_producer() << ";" << crew.get_director() << ";" << crew.get_writer() << ";" << crew.get_editor() << ";" << crew.get_prodDesign() << ";" << crew.get_setDeco() << ";" << crew.get_costumeDesign() << ";";
+	for (int i = 0; i < numCast; i++) {
+		outCrewFile << cast[i] << ";";
+		if (i > numCast) {
+			outCrewFile << endl;
+		}
+	}
+	cout << "The data has been stored";
+	cout << "\n";
+	outCrewFile.close();
+
 	system("PAUSE");
 }
