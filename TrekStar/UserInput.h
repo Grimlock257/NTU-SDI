@@ -21,27 +21,30 @@ namespace UserInput {
 	 * Get an integer input from the user
 	 *
 	 * @param question - The question to pose to the user
+	 * @param displayInline - Whether to have the question and the user input on the same line (default is false)
 	 *
 	 * @return The integer the user entered
 	 */
-	int get_integer_input(std::string question);
+	int get_integer_input(std::string question, bool displayInline = false);
 
 	/**
 	 * Get a double input from the user
 	 *
 	 * @param question - The question to pose to the user
+	 * @param displayInline - Whether to have the question and the user input on the same line (default is false)
 	 * @param allowNegative - Whether to allow negative numbers to be selected (default is true)
 	 *
 	 * @return The double the user entered
 	 */
-	double get_double_input(std::string question, bool allowNegative = true);
+	double get_double_input(std::string question, bool displayInline = false, bool allowNegative = true);
 
 	/**
 	 * Get a string input from the user
 	 *
-	 * @param question - The questoin to pose to the user
+	 * @param question - The question to pose to the user
+	 * @param displayInline - Whether to have the question and the user input on the same line (default is false)
 	 *
 	 * @return The string the user entered
 	 */
-	std::string get_string_input(std::string question);
+	std::string get_string_input(std::string question, bool displayInline = false);
 }
