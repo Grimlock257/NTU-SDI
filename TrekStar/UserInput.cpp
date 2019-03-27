@@ -37,7 +37,7 @@ namespace UserInput {
 	 * Get an integer input from the user
 	 *
 	 * @param question - The question to pose to the user
-	 * @param displayInline - Whether to have the question and the user input on the same line (default is false)
+	 * @param displayInline - Whether to have the question and the user input on the same line (default is true)
 	 *
 	 * @return The integer the user entered
 	 */
@@ -68,7 +68,7 @@ namespace UserInput {
 	 * Get a double input from the user
 	 *
 	 * @param question - The question to pose to the user
-	 * @param displayInline - Whether to have the question and the user input on the same line (default is false)
+	 * @param displayInline - Whether to have the question and the user input on the same line (default is true)
 	 * @param allowNegative - Whether to allow negative numbers to be selected (default is true)
 	 *
 	 * @return The double the user entered
@@ -106,7 +106,7 @@ namespace UserInput {
 	 * Get a string input from the user
 	 *
 	 * @param question - The question to pose to the user
-	 * @param displayInline - Whether to have the question and the user input on the same line (default is false)
+	 * @param displayInline - Whether to have the question and the user input on the same line (default is true)
 	 *
 	 * @return The string the user entered
 	 */
