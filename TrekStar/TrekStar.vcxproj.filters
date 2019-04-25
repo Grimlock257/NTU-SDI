@@ -78,6 +78,9 @@
     <ClCompile Include="Crew.cpp">
       <Filter>Source Files\Crew</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectLinkedList.cpp">
+      <Filter>Source Files\Project</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BluRay.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Crew.h">
       <Filter>Header Files\Crew</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectLinkedList.h">
+      <Filter>Header Files\Project</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

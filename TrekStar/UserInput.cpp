@@ -1,5 +1,10 @@
 #include "UserInput.h"
 
+#include <vector>
+#include <iostream>
+#include <sstream>
+#include <algorithm>
+
 using namespace std;
 
 namespace UserInput {
@@ -120,5 +125,33 @@ namespace UserInput {
 		getline(cin, userInput);
 
 		return userInput;
+	}
+
+	/**
+	 * Get a vector input from the user
+	 *
+	 * @param question - The question to pose to the user
+	 */
+	vector<string> get_vector_input(string question) {
+		cout << question << " ";
+		cout << "(Enter 'Q' to stop input)" << endl;
+
+		string userInput;
+		vector<string> entries;
+
+		while (true) {
+			cout << endl << "> ";
+
+			getline(cin, userInput);
+
+			// Convert to uppercase so we can check if they entered 'Q'
+			//std::string userInputUpperCase{*transform(userInput.begin(), userInput.end(), userInput.begin(), ::toupper) };
+			if (userInput == "Q")
+				break;
+
+			entries.push_back(userInput);
+		}
+
+		return entries;
 	}
 }

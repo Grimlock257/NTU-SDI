@@ -5,18 +5,21 @@
 using namespace std;
 
 // Constructor & deconstructor
+Project::Project() {
+}
+
 Project::Project(unsigned int projectId, string projectTitle, string projectSummary, string projectGenre, string projectDateRelease, string projectFilmingLoc, string projectLanguage, int projectRuntime, string projectKeywords, double projectTicketSale, string projectStatus)
-	: projectId(projectId),
-	projectTitle(projectTitle),
-	projectSummary(projectSummary),
-	projectGenre(projectGenre),
-	projectDateRelease(projectDateRelease),
-	projectFilmingLoc(projectFilmingLoc),
-	projectLanguage(projectLanguage),
-	projectRuntime(projectRuntime),
-	projectKeywords(projectKeywords),
-	projectTicketSale(projectTicketSale),
-	projectStatus(projectStatus) {
+	: id(projectId),
+	title(projectTitle),
+	summary(projectSummary),
+	genre(projectGenre),
+	date_release(projectDateRelease),
+	filming_loc(projectFilmingLoc),
+	language(projectLanguage),
+	runtime(projectRuntime),
+	keywords(projectKeywords),
+	ticket_sale(projectTicketSale),
+	status(projectStatus) {
 }
 
 Project::~Project() {
@@ -24,85 +27,85 @@ Project::~Project() {
 
 // Getters and setters for member attributes
 unsigned int Project::get_projectId() const {
-	return this->projectId;
+	return this->id;
 }
 
-string Project::get_projectTitle() const {
-	return this->projectTitle;
+string Project::get_title() const {
+	return this->title;
 }
 
-void Project::set_projectTitle(const string& value) {
-	this->projectTitle = value;
+void Project::set_title(const string& value) {
+	this->title = value;
 }
 
-string Project::get_projectSummary() const {
-	return this->projectSummary;
+string Project::get_summary() const {
+	return this->summary;
 }
 
-void Project::set_projectSummary(const string& value) {
-	this->projectSummary = value;
+void Project::set_summary(const string& value) {
+	this->summary = value;
 }
 
-string Project::get_projectGenre() const {
-	return this->projectGenre;
+string Project::get_genre() const {
+	return this->genre;
 }
 
-void Project::set_projectGenre(const string& value) {
-	this->projectGenre = value;
+void Project::set_genre(const string& value) {
+	this->genre = value;
 }
 
-string Project::get_projectDateRelease() const {
-	return this->projectDateRelease;
+string Project::get_date_release() const {
+	return this->date_release;
 }
 
-void Project::set_projectDateRelease(const string& value) {
-	this->projectDateRelease = value;
+void Project::set_date_release(const string& value) {
+	this->date_release = value;
 }
 
-string Project::get_projectFilmingLoc() const {
-	return this->projectFilmingLoc;
+string Project::get_filming_loc() const {
+	return this->filming_loc;
 }
 
-void Project::set_projectFilmingLoc(const string& value) {
-	this->projectFilmingLoc = value;
+void Project::set_filming_loc(const string& value) {
+	this->filming_loc = value;
 }
 
-string Project::get_projectLanguage() const {
-	return this->projectLanguage;
+string Project::get_language() const {
+	return this->language;
 }
 
-void Project::set_projectLanguage(const string& value) {
-	this->projectLanguage = value;
+void Project::set_language(const string& value) {
+	this->language = value;
 }
 
-int Project::get_projectRuntime() const {
-	return this->projectRuntime;
+int Project::get_runtime() const {
+	return this->runtime;
 }
 
-void Project::set_projectRuntime(const int& value) {
-	this->projectRuntime = value;
+void Project::set_runtime(const int& value) {
+	this->runtime = value;
 }
 
-string Project::get_projectKeywords() const {
-	return this->projectKeywords;
+string Project::get_keywords() const {
+	return this->keywords;
 }
 
-void Project::set_projectKeywords(const string& value) {
-	this->projectKeywords = value;
+void Project::set_keywords(const string& value) {
+	this->keywords = value;
 }
 
-double Project::get_projectTicketSale() const {
-	return this->projectTicketSale;
+double Project::get_ticket_sale() const {
+	return this->ticket_sale;
 }
 
-void Project::set_projectTicketSale(const double& value) {
-	this->projectTicketSale = value;
+void Project::set_ticket_sale(const double& value) {
+	this->ticket_sale = value;
 }
 
-string Project::get_projectStatus() const {
-	return this->projectStatus;
+string Project::get_status() const {
+	return this->status;
 }
 
-void Project::set_projectStatus(const string& value) {
-	this->projectStatus = value;
+void Project::set_status(const string& value) {
+	this->status = value;
 }

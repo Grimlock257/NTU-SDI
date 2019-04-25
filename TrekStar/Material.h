@@ -11,7 +11,7 @@ using namespace std;
 class Material {
 public:
 	// Constructor & deconstructor
-	Material(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, PackagingMaterial packaging_material);
+	Material(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material);
 	~Material();
 	
 	// Methods
@@ -44,8 +44,8 @@ public:
 	string get_frame_aspect() const;
 	void set_frame_aspect(const string& value);
 
-	PackagingMaterial get_packaging_material() const;
-	void set_packaging_material(const PackagingMaterial& value);
+	string get_packaging_material() const;
+	void set_packaging_material(const string& value);
 	
 protected:
 	// General material information
@@ -58,5 +58,6 @@ protected:
 	string retail_price;
 	string subtitles;
 	string frame_aspect;
-	PackagingMaterial packaging_material;
+	string packaging_material;
+	// PackagingMaterial packaging_material;
 };

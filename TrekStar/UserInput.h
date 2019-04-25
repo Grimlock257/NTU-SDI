@@ -1,8 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <string>
-#include <sstream>
+#include <vector>
 
 /* Functions relating to gathering user input from the command line*/
 namespace UserInput {
@@ -11,7 +10,7 @@ namespace UserInput {
 	 *
 	 * @param question - The question to pose to the user
 	 * @param options - The available options to the user in the form of a string
-	 * @param amountOptions - The amount of available optoins to the user (used to determine whether the inputted option is valid)
+	 * @param amountOptions - The amount of available options to the user (used to determine whether the inputted option is valid)
 	 *
 	 * @return The option the user chose
 	 */
@@ -47,4 +46,11 @@ namespace UserInput {
 	 * @return The string the user entered
 	 */
 	std::string get_string_input(std::string question, bool displayInline = true);
+
+	/**
+	* Get a vector input from the user
+	*
+	* @param question - The question to pose to the user
+	*/
+	std::vector<std::string> get_vector_input(std::string question);
 }
