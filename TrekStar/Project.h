@@ -52,6 +52,8 @@ public:
 	vector<unsigned int> get_crew() const;
 	void set_crew(const vector<unsigned int>& value);
 
+	void display() const;
+
 protected:
 	// General project information
 	unsigned int id;

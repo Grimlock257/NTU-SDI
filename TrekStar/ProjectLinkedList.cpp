@@ -70,17 +70,19 @@ void ProjectList::delete_node(const string& title) {
 	throw std::invalid_argument("No project was found with title '" + title + "'. Deletion failed!");
 }
 
-void ProjectList::PrintProjectList() {
+void ProjectList::print_project_list() {
 	curr = head;
-	cout << "Display Project List : \n";
+
+	cout << "Project List : \n";
 	while (curr != nullptr) {
-		cout << curr->project.get_title() << ", " << curr->project.get_summary() << ", " << curr->project.get_genre() << ", " << curr->project.get_date_release() << ", " << curr->project.get_filming_loc() << ", " << curr->project.get_language() << ", " << curr->project.get_runtime() << ", " << curr->project.get_keywords() << ", " << curr->project.get_ticket_sale() << ", " << curr->project.get_status() << endl;
+		curr->project.display();
 		cout << "\n";
+
 		curr = curr->next;
 	}
 }
 
-void ProjectList::writeFile() {
+void ProjectList::write_file() const {
 	node_ptr write;
 	ofstream writeProjectFile;
 	writeProjectFile.open("OutputFile.txt", ios::app);

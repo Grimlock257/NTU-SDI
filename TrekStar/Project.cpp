@@ -1,6 +1,7 @@
 #include <string>
 
 #include "Project.h"
+#include <iostream>
 
 using namespace std;
 
@@ -117,4 +118,21 @@ vector<unsigned> Project::get_crew() const {
 // TODO: Keep this?
 void Project::set_crew(const vector<unsigned>& value) {
 	this->crew = value;
+}
+
+void Project::display() const {
+	cout << "Project Details\n";
+	cout << "Title: " << title << "\n";
+	cout << "Summary: " << summary << "\n";
+	cout << "Genre: " << genre << "\n";
+	cout << "Date Released: " << date_release << "\n";
+	cout << "Filming Location: " << filming_loc << "\n";
+	cout << "Language: " << language << "\n";
+	cout << "Runtime: " << runtime << "\n";
+	cout << "Keywords: " << keywords << "\n";
+	cout << "Ticket Sales: " << ticket_sale << "\n";
+	cout << "Status: " << status << endl;
+
+	// vector<unsigned int> crew;
+	// vector<unsigned int> materials;
 }
