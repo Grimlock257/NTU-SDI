@@ -21,8 +21,8 @@ public:
 	// Functions
 	void add_node(const Project& add_project);
 	void delete_node(const string& title);
-	void PrintProjectList();
-	void writeFile();
+	void print_project_list();
+	void write_file() const;
 	Project search_by_title(const string& title);
 	vector<string> search_by_actor(const string& actor_name);
 	//void readFile(node_ptr read);

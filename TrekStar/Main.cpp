@@ -77,7 +77,7 @@ void mainMenu() {
 
 			string deleteProject = UserInput::get_string_input("Want to delete a project (Yes/No) : "); //did not disp the correct output
 			while (!deleteProject.compare("Yes")) {
-				list.PrintProjectList();
+				list.print_project_list();
 				string del = UserInput::get_string_input("---Which project would you like to delete?---");
 
 				// boolean return on delete_no for success or throw an error?
@@ -86,7 +86,7 @@ void mainMenu() {
 				} catch (const invalid_argument& e) {
 					cout << e.what() << endl;
 				}
-				list.PrintProjectList();
+				list.print_project_list();
 				deleteProject = UserInput::get_string_input("Want to delete a project (Yes/No) : ");
 			}
 
@@ -96,7 +96,7 @@ void mainMenu() {
 			string quit = UserInput::get_string_input("Want to quit (Yes/No) : ");
 			if (!quit.compare("Yes")) {
 				//list.WriteToFile(title, summary, genre, date_release, filming_loc, language, runtime, keywords, ticket_sale, status);
-				list.writeFile();
+				list.write_file();
 				cout << "The data has been stored...\n";
 			}
 			// createProject();
