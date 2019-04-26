@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 #include "ProjectLinkedList.h"
 
@@ -12,6 +13,12 @@ ProjectList::ProjectList() {
 	head = nullptr;
 	curr = nullptr;
 	temp = nullptr;
+
+	vector<Project> all_projects = read_file();
+
+	for (const Project& all_project : all_projects) {
+		add_node(all_project);
+	}
 }
 
 void ProjectList::add_node(const Project& add_project) {
@@ -85,9 +92,10 @@ void ProjectList::print_project_list() {
 void ProjectList::write_file() const {
 	node_ptr write;
 	ofstream writeProjectFile;
-	writeProjectFile.open("OutputFile.txt", ios::app);
+	writeProjectFile.open("Projects.txt", ios::out);
 
 	if (!writeProjectFile) {
+		// TODO: Replace with throw
 		cout << "Error opening file\n";
 	}
 
@@ -98,101 +106,55 @@ void ProjectList::write_file() const {
 	writeProjectFile.close();
 }
 
-void ProjectList::read_file() {
-	ifstream readProjectFile;
+vector<string> ProjectList::split_by_comma(const string& input_string) const {
+	vector<string> tokens;
+	string token;
 
-	readProjectFile.open("OutputFile.txt", ios::in);
-	if (!readProjectFile) return;
+	stringstream ss(input_string);
 
-	while (!readProjectFile.eof()) {
-		string title;
-		string summary;
-		string genre;
-		string date_release;
-		string filming_loc;
-		string language;
-		string runtime; // int
-		string keywords;
-		string ticket_sale; // double
-		string status;
-
-		getline(readProjectFile, title, ';');
-		getline(readProjectFile, summary, ';');
-		getline(readProjectFile, genre, ';');
-		getline(readProjectFile, date_release, ';');
-		getline(readProjectFile, filming_loc, ';');
-		getline(readProjectFile, language, ';');
-		getline(readProjectFile, runtime, ';');
-		getline(readProjectFile, keywords, ';');
-		getline(readProjectFile, ticket_sale, ';');
-		getline(readProjectFile, status, ';');
-
-		cout << "==============================================================" << endl;
-		cout << "Title: " << title << "\n";
-		cout << "Summary: " << summary << "\n";
-		cout << "Genre: " << genre << "\n";
-		cout << "Date Released: " << date_release << "\n";
-		cout << "Filming Location: " << filming_loc << "\n";
-		cout << "Language: " << language << "\n";
-		cout << "Runtime: " << runtime << "\n";
-		cout << "Keywords: " << keywords << "\n";
-		cout << "Ticket Sales: " << ticket_sale << "\n";
-		cout << "Status: " << status << endl;
-		cout << "==============================================================" << endl;
-
-		// TODO: Commentd  as wasn't working
-		//Project project(1, title, summary, genre, date_release, filming_loc, language, 1, keywords, 1, status);
-		//cout << "=== Project read in from file: " << endl;
-		//project.display();
+	while (getline(ss, token, ';')) {
+		tokens.push_back(token);
 	}
 
-
-
-
+	return tokens;
 }
 
-//void ProjectList::WriteToFile(string wTitle, string wSummary, string wGenre, string wDateRel, string wFimLoc, string wLang, int wRuntime, string wKey, double wTicSale, string wStatus)
-//{
-//	ofstream writeProjectFile;
-//	writeProjectFile.open("OutputFile.txt", ios::app);
-//
-//	
-//	node_ptr write = new TrekStarProject;
-//	write->next = NULL;
-//	write->title = wTitle;
-//	write->summary = wSummary;
-//	write->genre = wGenre;
-//	write->date_release = wDateRel;
-//	write->filming_loc = wFimLoc;
-//	write->language = wLang;
-//	write->runtime = wRuntime;
-//	write->keywords = wKey;
-//	write->ticket_sale = wTicSale;
-//	write->status = wStatus;
-//
-//	if (!writeProjectFile)
-//	{
-//		head = write;
-//		curr = NULL;
-//		temp = NULL;
-//
-//		if (head != NULL) //have a data
-//		{
-//			curr = head;
-//			while (curr->next != NULL)
-//			{
-//				curr = curr->next;
-//			}
-//			curr->next = write;
-//			writeProjectFile << write->title << "; " << write->summary << "; " << write->genre << "; " << write->date_release << "; " << write->filming_loc << "; " << write->language << "; " << write->runtime << "; " << write->keywords << "; " << write->ticket_sale << "; " << write->status << ";\n " << endl;
-//		}
-//		else //will create new data
-//		{
-//			head = write;
-//			writeProjectFile << write->title << "; " << write->summary << "; " << write->genre << "; " << write->date_release << "; " << write->filming_loc << "; " << write->language << "; " << write->runtime << "; " << write->keywords << "; " << write->ticket_sale << "; " << write->status << ";\n " << endl;
-//		}
-//	}	
-//}
+
+vector<Project> ProjectList::read_file() const {
+	vector<Project> all_projects;
+
+	ifstream readProjectFile;
+	string line;
+
+	readProjectFile.open("Projects.txt", ios::in);
+	if (!readProjectFile) return all_projects;
+
+	while (getline(readProjectFile, line)) {
+		vector<string> parts = split_by_comma(line);
+
+		// TODO: 10 is amount of expected properties to be read from the file
+		if (parts.size() != 10) {
+			// TODO: Replace with throw exception
+			cout << "Incorrect amount of properties from the file. Found " << parts.size() << " instead of 9. Project could not be read." << endl;
+		} else {
+			string title = parts[0];
+			string summary = parts[1];
+			string genre = parts[2];
+			string date_release = parts[3];
+			string filming_loc = parts[4];
+			string language = parts[5];
+			string runtime = parts[6]; // TODO: Should be int
+			string keywords = parts[7];
+			string ticket_sale = parts[8]; // TODO: Should be double
+			string status = parts[9];
+
+			all_projects.emplace_back(1, title, summary, genre, date_release, filming_loc, language, 1, keywords, 1, status);
+		}
+		cout << endl;
+	}
+
+	return all_projects;
+}
 
 // Untested
 Project ProjectList::search_by_title(const string& title) {

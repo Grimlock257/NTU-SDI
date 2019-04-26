@@ -28,13 +28,10 @@ Project createProject();
 void createCrew();
 void removeProject();
 
+// ProjectList constructor called when creating this variable which calls the read_file() method and loads of saved projects into program memory
 ProjectList list;
 
 int main() {
-	// createMaterial();
-	// createProject();
-	// createCrew();
-
 	mainMenu();
 
 	// Keep window open
@@ -42,15 +39,6 @@ int main() {
 }
 
 void mainMenu() {
-	// This prefixes the menu as was easier to test
-
-	// list.print_project_list();
-	list.read_file();
-	// list.print_project_list();
-
-	cout << "Press enter to continue..." << endl;
-	cin.get();
-
 	while (true) {
 		// Ask the user what they want to do
 		int choice = UserInput::get_menu_input("What would you like to do?", "1) Create new project\n2) Create new material for a project\n3) Edit projects\n4) Edit materials\n5) Add crew information for a project\n6) Search projects\n7) Delete project\n8) Quit", 8);
