@@ -14,7 +14,7 @@ ProjectList::ProjectList() {
 	temp = nullptr;
 }
 
-void ProjectList::add_node(Project add_project) {
+void ProjectList::add_node(const Project& add_project) {
 	node_ptr new_node_ptr = new TrekStarProject;
 	new_node_ptr->project = add_project;
 	new_node_ptr->next = nullptr;
@@ -33,44 +33,41 @@ void ProjectList::add_node(Project add_project) {
 	}
 }
 
-void ProjectList::delete_node(Project del_project) {
-	node_ptr del_node_ptr = nullptr;
-	temp = head;
+void ProjectList::delete_node(const string& title) {
+	node_ptr prev = head;
 	curr = head;
-	if (del_node_ptr == head) {
-		while (curr != nullptr
-			&& curr->project.get_title() != del_project.get_title()
-			&& curr->project.get_summary() != del_project.get_summary()
-			&& curr->project.get_genre() != del_project.get_genre()
-			&& curr->project.get_date_release() != del_project.get_date_release()
-			&& curr->project.get_filming_loc() != del_project.get_filming_loc()
-			&& curr->project.get_language() != del_project.get_language()
-			&& curr->project.get_runtime() != del_project.get_runtime()
-			&& curr->project.get_keywords() != del_project.get_keywords()
-			&& curr->project.get_ticket_sale() != del_project.get_ticket_sale()
-			&& curr->project.get_status() != del_project.get_status()) {
+	temp = head;
 
-			temp = curr;
-			curr = curr->next;
-		}
+	// Empty list so exit function
+	if (head == nullptr) {
+		cout << "The project list is empty, " << title << " not deleted\n";
+		return;
 	}
 
-	if (curr == nullptr) {
-		cout << del_project.get_title() << " was not in the list\n";
-		delete del_node_ptr;
-	} else {
-		del_node_ptr = curr;
+	// Loop through all elements
+	while (curr != nullptr) {
+		// Check iteration title matches supplied title, if so, delete and return
+		if (curr->project.get_title() == title) {
+			// Project to delete is the first one
+			if (curr == head) {
+				head = curr->next;
+				delete curr;
+			} else {
+				temp = curr;
+				prev->next = curr->next;
+				delete curr;
+			}
+
+			return;
+		}
+
+		// No match, move to next node in the LinkedList
+		prev = curr;
 		curr = curr->next;
-		temp->next = curr;
-
-		if (del_node_ptr == head) {
-			head = head->next;
-			temp = nullptr;
-		}
-
-		delete del_node_ptr;
-		cout << "The project " << del_project.get_title() << " was deleted\n";
 	}
+
+	// No project found matching supplied title, throw error
+	throw std::invalid_argument("No project was found with title '" + title + "'. Deletion failed!");
 }
 
 void ProjectList::PrintProjectList() {
@@ -154,3 +151,44 @@ void ProjectList::writeFile() {
 //		}
 //	}	
 //}
+
+// Untested
+Project ProjectList::search_by_title(const string& title) {
+	Project project;
+	curr = head;
+
+	// While current node isn't a nullptr
+	while (curr != nullptr) {
+		// Check if iteration project title matches search title, if so set this value and break
+		if (curr->project.get_title() == title) {
+			project = curr->project;
+			break;
+		}
+
+		// Wasn't found so look at the next node
+		curr = curr->next;
+	}
+
+	return project;
+}
+
+// Untested
+vector<string> ProjectList::search_by_actor(const string& actor_name) {
+	vector<string> project_titles;
+	curr = head;
+
+	// While current node isn't a nullptr
+	while (curr != nullptr) {
+		vector<unsigned int> project_crew = curr->project.get_crew();
+
+		for (int i = 0; i < project_crew.size(); i++) {
+			if (project_crew[i] == 1) { // TODO: Change this to == actor_name
+				project_titles.push_back(curr->project.get_title());
+			}
+		}
+
+		curr = curr->next;
+	}
+
+	return project_titles;
+}

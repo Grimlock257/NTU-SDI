@@ -48,6 +48,10 @@ public:
 	string get_status() const;
 	void set_status(const string& value);
 
+	// TODO: Edit crew?
+	vector<unsigned int> get_crew() const;
+	void set_crew(const vector<unsigned int>& value);
+
 protected:
 	// General project information
 	unsigned int id;

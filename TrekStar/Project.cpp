@@ -109,3 +109,12 @@ string Project::get_status() const {
 void Project::set_status(const string& value) {
 	this->status = value;
 }
+
+vector<unsigned> Project::get_crew() const {
+	return crew;
+}
+
+// TODO: Keep this?
+void Project::set_crew(const vector<unsigned>& value) {
+	this->crew = value;
+}

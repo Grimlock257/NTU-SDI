@@ -19,10 +19,12 @@ public:
 	ProjectList(); // Set initial values for head, curr, temp
 
 	// Functions
-	void add_node(Project add_project);
-	void delete_node(Project del_project);
+	void add_node(const Project& add_project);
+	void delete_node(const string& title);
 	void PrintProjectList();
 	void writeFile();
+	Project search_by_title(const string& title);
+	vector<string> search_by_actor(const string& actor_name);
 	//void readFile(node_ptr read);
 	//void WriteToFile(string wTitle, string wSummary, string wGenre, string wDateRel, string wFimLoc, string wLang, int wRuntime, string wKey, double wTicSale, string wStatus);
 };

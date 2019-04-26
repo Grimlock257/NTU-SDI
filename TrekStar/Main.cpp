@@ -29,6 +29,8 @@ Project createProject();
 void createCrew();
 void removeProject();
 
+ProjectList list;
+
 int main() {
 	// createMaterial();
 	// createProject();
@@ -49,10 +51,18 @@ void mainMenu() {
 		case 1:
 		{
 			// Case 1 filled with Nur Main.cpp int main() content
-			ProjectList list;
 			Project project;
-			//project = createProject();
-			//list.add_node(project);
+			project = createProject();
+			list.add_node(project);
+
+			if (project.get_status() == "Released") {
+				int choice = UserInput::get_menu_input("Do you want to add a material for this project?", "1) Yes\n2) No", 2);
+
+				if (choice == 1) {
+					// TODO: Get this material from this function
+					createMaterial();
+				}
+			}
 
 			//string addNew = UserInput::get_string_input("Add new project? (Yes/No) : ");
 			//while (!addNew.compare("Yes")) {
@@ -62,16 +72,26 @@ void mainMenu() {
 			//}
 			//list.PrintProjectList();
 
+
+
+
 			string deleteProject = UserInput::get_string_input("Want to delete a project (Yes/No) : "); //did not disp the correct output
 			while (!deleteProject.compare("Yes")) {
 				list.PrintProjectList();
 				string del = UserInput::get_string_input("---Which project would you like to delete?---");
-				if (project.get_title().compare(del)) {
-					list.delete_node(project);
+
+				// boolean return on delete_no for success or throw an error?
+				try {
+					list.delete_node(del);
+				} catch (const invalid_argument& e) {
+					cout << e.what() << endl;
 				}
 				list.PrintProjectList();
 				deleteProject = UserInput::get_string_input("Want to delete a project (Yes/No) : ");
 			}
+
+
+
 
 			string quit = UserInput::get_string_input("Want to quit (Yes/No) : ");
 			if (!quit.compare("Yes")) {
@@ -105,9 +125,8 @@ void mainMenu() {
 	}
 }
 
-void remove_project()
-{
-	
+void remove_project() {
+
 }
 
 // All of the functions below are just for testing and will probably be moved elsewhere - also
@@ -253,16 +272,16 @@ void createProject() {
 */
 
 Project createProject() {
-	string projectTitle = UserInput::get_string_input("Enter project title:");
-	string projectSummary = UserInput::get_string_input("Enter project summary:");
-	string projectGenre = UserInput::get_string_input("Enter project genre:");
+	string projectTitle = UserInput::get_string_input("Enter title:");
+	string projectSummary = UserInput::get_string_input("Enter summary:");
+	string projectGenre = UserInput::get_string_input("Enter genre:");
 	string projectDateRelease = UserInput::get_string_input("Enter release date:");
 	string projectFilmingLoc = UserInput::get_string_input("Enter filming location:");
 	string projectLanguage = UserInput::get_string_input("Enter language:");
 	int projectRuntime = UserInput::get_integer_input("Enter runtime:");
 	string projectKeywords = UserInput::get_string_input("Enter keyword:");
 	double projectTicketSale = UserInput::get_double_input("Enter ticket sales:");
-	string projectStatus = UserInput::get_string_input("Enter status (Unreleased / Now Playing / Released :");
+	string projectStatus = UserInput::get_string_input("Enter status (Unreleased / Now Playing / Released) :");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
 	return Project(1, projectTitle, projectSummary, projectGenre, projectDateRelease, projectFilmingLoc, projectLanguage, projectRuntime, projectKeywords, projectTicketSale, projectStatus);
