@@ -7,37 +7,38 @@
 
 using namespace std;
 
-//constructor
+// Constructor
 ProjectList::ProjectList() {
-	head = NULL;
-	curr = NULL;
-	temp = NULL;
+	head = nullptr;
+	curr = nullptr;
+	temp = nullptr;
 }
 
-void ProjectList::AddNode(Project add_project) {
-	nodePtr n = new TrekStarProject;
-	n->project = add_project;
-	n->next = NULL;
+void ProjectList::add_node(Project add_project) {
+	node_ptr new_node_ptr = new TrekStarProject;
+	new_node_ptr->project = add_project;
+	new_node_ptr->next = nullptr;
 
-	if (head != NULL) {
-		//have a data
+	if (head != nullptr) {
+		// Existing data in LinkedList so find end of the LinkedList and add this new node
 		curr = head;
-		while (curr->next != NULL) {
+		while (curr->next != nullptr) {
 			curr = curr->next;
 		}
-		curr->next = n;
+
+		curr->next = new_node_ptr;
 	} else {
-		//will create new data
-		head = n;
+		// Empty LinkedList so set head to be this new node
+		head = new_node_ptr;
 	}
 }
 
-void ProjectList::DeleteNode(Project del_project) {
-	nodePtr delPtr = NULL;
+void ProjectList::delete_node(Project del_project) {
+	node_ptr del_node_ptr = nullptr;
 	temp = head;
 	curr = head;
-	if (delPtr == head)
-		while (curr != NULL
+	if (del_node_ptr == head) {
+		while (curr != nullptr
 			&& curr->project.get_title() != del_project.get_title()
 			&& curr->project.get_summary() != del_project.get_summary()
 			&& curr->project.get_genre() != del_project.get_genre()
@@ -52,28 +53,30 @@ void ProjectList::DeleteNode(Project del_project) {
 			temp = curr;
 			curr = curr->next;
 		}
-	if (curr == NULL) {
+	}
+
+	if (curr == nullptr) {
 		cout << del_project.get_title() << " was not in the list\n";
-		delete delPtr;
+		delete del_node_ptr;
 	} else {
-		delPtr = curr;
+		del_node_ptr = curr;
 		curr = curr->next;
 		temp->next = curr;
-		if (delPtr == head) {
+
+		if (del_node_ptr == head) {
 			head = head->next;
-			temp = NULL;
+			temp = nullptr;
 		}
-		delete delPtr;
+
+		delete del_node_ptr;
 		cout << "The project " << del_project.get_title() << " was deleted\n";
 	}
 }
 
-
-
 void ProjectList::PrintProjectList() {
 	curr = head;
 	cout << "Display Project List : \n";
-	while (curr != NULL) {
+	while (curr != nullptr) {
 		cout << curr->project.get_title() << ", " << curr->project.get_summary() << ", " << curr->project.get_genre() << ", " << curr->project.get_date_release() << ", " << curr->project.get_filming_loc() << ", " << curr->project.get_language() << ", " << curr->project.get_runtime() << ", " << curr->project.get_keywords() << ", " << curr->project.get_ticket_sale() << ", " << curr->project.get_status() << endl;
 		cout << "\n";
 		curr = curr->next;
@@ -81,19 +84,22 @@ void ProjectList::PrintProjectList() {
 }
 
 void ProjectList::writeFile() {
-	nodePtr write;
+	node_ptr write;
 	ofstream writeProjectFile;
 	writeProjectFile.open("OutputFile.txt", ios::app);
+
 	if (!writeProjectFile) {
 		cout << "Error opening file\n";
 	}
-	for (write = head; write != NULL; write = write->next) {
+
+	for (write = head; write != nullptr; write = write->next) {
 		writeProjectFile << write->project.get_title() << "; " << write->project.get_summary() << "; " << write->project.get_genre() << "; " << write->project.get_date_release() << "; " << write->project.get_filming_loc() << "; " << write->project.get_language() << "; " << write->project.get_runtime() << "; " << write->project.get_keywords() << "; " << write->project.get_ticket_sale() << "; " << write->project.get_status() << ";\n " << endl;
 	}
+
 	writeProjectFile.close();
 }
 
-//void ProjectList::readFile(nodePtr read)
+//void ProjectList::readFile(node_ptr read)
 //{
 //	ifstream readProjectFile;
 //	readProjectFile.open("OutputFile.txt", ios::in);
@@ -101,7 +107,7 @@ void ProjectList::writeFile() {
 //
 //	while (!readProjectFile.eof())
 //	{
-//		nodePtr read;
+//		node_ptr read;
 //		getline()
 //	}
 //}
@@ -112,7 +118,7 @@ void ProjectList::writeFile() {
 //	writeProjectFile.open("OutputFile.txt", ios::app);
 //
 //	
-//	nodePtr write = new TrekStarProject;
+//	node_ptr write = new TrekStarProject;
 //	write->next = NULL;
 //	write->title = wTitle;
 //	write->summary = wSummary;

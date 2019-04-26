@@ -25,8 +25,9 @@ VHS createVHS();
 void mainMenu();
 void createMaterial();
 // void createProject();
-Project createProject(); // Nur Version
+Project createProject();
 void createCrew();
+void removeProject();
 
 int main() {
 	// createMaterial();
@@ -50,20 +51,23 @@ void mainMenu() {
 			// Case 1 filled with Nur Main.cpp int main() content
 			ProjectList list;
 			Project project;
-			string addNew = UserInput::get_string_input("Add new project? (Yes/No) : ");
-			while (!addNew.compare("Yes")) {
-				project = createProject();
-				list.AddNode(project);
-				addNew = UserInput::get_string_input("Add new project? (Yes/No) : ");
-			}
-			list.PrintProjectList();
+			//project = createProject();
+			//list.add_node(project);
+
+			//string addNew = UserInput::get_string_input("Add new project? (Yes/No) : ");
+			//while (!addNew.compare("Yes")) {
+			//	project = createProject();
+			//	list.add_node(project);
+			//	addNew = UserInput::get_string_input("Add new project? (Yes/No) : ");
+			//}
+			//list.PrintProjectList();
 
 			string deleteProject = UserInput::get_string_input("Want to delete a project (Yes/No) : "); //did not disp the correct output
 			while (!deleteProject.compare("Yes")) {
 				list.PrintProjectList();
 				string del = UserInput::get_string_input("---Which project would you like to delete?---");
 				if (project.get_title().compare(del)) {
-					list.DeleteNode(project);
+					list.delete_node(project);
 				}
 				list.PrintProjectList();
 				deleteProject = UserInput::get_string_input("Want to delete a project (Yes/No) : ");
@@ -99,6 +103,11 @@ void mainMenu() {
 			PRINT("Something went wrong... please try again!");
 		}
 	}
+}
+
+void remove_project()
+{
+	
 }
 
 // All of the functions below are just for testing and will probably be moved elsewhere - also
@@ -139,9 +148,7 @@ BluRay createBluRay() {
 	vector<string> bonus_features = UserInput::get_vector_input("Enter Bonus Features:");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	BluRay bluRay(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
-
-	return bluRay;
+	return BluRay(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
 }
 
 ComboBox createCombo() {
@@ -156,9 +163,7 @@ ComboBox createCombo() {
 	string packaging_material = UserInput::get_string_input("Enter Packaging Material (PLASTIC or CARDBOARD):");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	ComboBox comboBox(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
-
-	return comboBox;
+	return ComboBox(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 }
 
 DoubleSidedDVD createDoubleDVD() {
@@ -178,9 +183,7 @@ DoubleSidedDVD createDoubleDVD() {
 	string side_b_content = UserInput::get_string_input("Enter Side B Content:");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	DoubleSidedDVD doubleSidedDvd(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features, side_a_content, side_b_content);
-
-	return doubleSidedDvd;
+	return DoubleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features, side_a_content, side_b_content);
 }
 
 SingleSidedDVD createSingleDVD() {
@@ -198,9 +201,7 @@ SingleSidedDVD createSingleDVD() {
 	vector<string> bonus_features = UserInput::get_vector_input("Enter Bonus Features:");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	SingleSidedDVD singleSidedDvd(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
-
-	return singleSidedDvd;
+	return SingleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
 }
 
 VHS createVHS() {
@@ -215,9 +216,7 @@ VHS createVHS() {
 	string packaging_material = UserInput::get_string_input("Enter Packaging Material (PLASTIC or CARDBOARD):");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	VHS vhs(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
-
-	return vhs;
+	return VHS(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 }
 
 /*

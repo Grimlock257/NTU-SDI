@@ -3,24 +3,26 @@
 
 class ProjectList {
 private:
-	//node
+	// Node
 	typedef struct TrekStarProject {
 		Project project;
 		TrekStarProject *next;
 
-	}*nodePtr;
+	}*node_ptr;
 
-	nodePtr head;
-	nodePtr curr;
-	nodePtr temp;
+	node_ptr head;
+	node_ptr curr;
+	node_ptr temp;
 
+public:
+	// Constructor
+	ProjectList(); // Set initial values for head, curr, temp
 
-public: //funcions
-	ProjectList(); //set initial values for head,curr,temp
-	void AddNode(Project add_project);
-	void DeleteNode(Project del_project);
+	// Functions
+	void add_node(Project add_project);
+	void delete_node(Project del_project);
 	void PrintProjectList();
 	void writeFile();
-	//void readFile(nodePtr read);
+	//void readFile(node_ptr read);
 	//void WriteToFile(string wTitle, string wSummary, string wGenre, string wDateRel, string wFimLoc, string wLang, int wRuntime, string wKey, double wTicSale, string wStatus);
 };
