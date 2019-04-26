@@ -25,6 +25,6 @@ public:
 	void write_file() const;
 	Project search_by_title(const string& title);
 	vector<string> search_by_actor(const string& actor_name);
-	//void readFile(node_ptr read);
+	void read_file();
 	//void WriteToFile(string wTitle, string wSummary, string wGenre, string wDateRel, string wFimLoc, string wLang, int wRuntime, string wKey, double wTicSale, string wStatus);
 };

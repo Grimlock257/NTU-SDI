@@ -92,24 +92,64 @@ void ProjectList::write_file() const {
 	}
 
 	for (write = head; write != nullptr; write = write->next) {
-		writeProjectFile << write->project.get_title() << "; " << write->project.get_summary() << "; " << write->project.get_genre() << "; " << write->project.get_date_release() << "; " << write->project.get_filming_loc() << "; " << write->project.get_language() << "; " << write->project.get_runtime() << "; " << write->project.get_keywords() << "; " << write->project.get_ticket_sale() << "; " << write->project.get_status() << ";\n " << endl;
+		writeProjectFile << write->project.get_title() << ";" << write->project.get_summary() << ";" << write->project.get_genre() << ";" << write->project.get_date_release() << ";" << write->project.get_filming_loc() << ";" << write->project.get_language() << ";" << write->project.get_runtime() << ";" << write->project.get_keywords() << ";" << write->project.get_ticket_sale() << ";" << write->project.get_status() << ";" << endl;
 	}
 
 	writeProjectFile.close();
 }
 
-//void ProjectList::readFile(node_ptr read)
-//{
-//	ifstream readProjectFile;
-//	readProjectFile.open("OutputFile.txt", ios::in);
-//	if (!readProjectFile) return;
-//
-//	while (!readProjectFile.eof())
-//	{
-//		node_ptr read;
-//		getline()
-//	}
-//}
+void ProjectList::read_file() {
+	ifstream readProjectFile;
+
+	readProjectFile.open("OutputFile.txt", ios::in);
+	if (!readProjectFile) return;
+
+	while (!readProjectFile.eof()) {
+		string title;
+		string summary;
+		string genre;
+		string date_release;
+		string filming_loc;
+		string language;
+		string runtime; // int
+		string keywords;
+		string ticket_sale; // double
+		string status;
+
+		getline(readProjectFile, title, ';');
+		getline(readProjectFile, summary, ';');
+		getline(readProjectFile, genre, ';');
+		getline(readProjectFile, date_release, ';');
+		getline(readProjectFile, filming_loc, ';');
+		getline(readProjectFile, language, ';');
+		getline(readProjectFile, runtime, ';');
+		getline(readProjectFile, keywords, ';');
+		getline(readProjectFile, ticket_sale, ';');
+		getline(readProjectFile, status, ';');
+
+		cout << "==============================================================" << endl;
+		cout << "Title: " << title << "\n";
+		cout << "Summary: " << summary << "\n";
+		cout << "Genre: " << genre << "\n";
+		cout << "Date Released: " << date_release << "\n";
+		cout << "Filming Location: " << filming_loc << "\n";
+		cout << "Language: " << language << "\n";
+		cout << "Runtime: " << runtime << "\n";
+		cout << "Keywords: " << keywords << "\n";
+		cout << "Ticket Sales: " << ticket_sale << "\n";
+		cout << "Status: " << status << endl;
+		cout << "==============================================================" << endl;
+
+		// TODO: Commentd  as wasn't working
+		//Project project(1, title, summary, genre, date_release, filming_loc, language, 1, keywords, 1, status);
+		//cout << "=== Project read in from file: " << endl;
+		//project.display();
+	}
+
+
+
+
+}
 
 //void ProjectList::WriteToFile(string wTitle, string wSummary, string wGenre, string wDateRel, string wFimLoc, string wLang, int wRuntime, string wKey, double wTicSale, string wStatus)
 //{

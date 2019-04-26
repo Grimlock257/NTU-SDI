@@ -24,7 +24,6 @@ SingleSidedDVD createSingleDVD();
 VHS createVHS();
 void mainMenu();
 void createMaterial();
-// void createProject();
 Project createProject();
 void createCrew();
 void removeProject();
@@ -43,14 +42,22 @@ int main() {
 }
 
 void mainMenu() {
+	// This prefixes the menu as was easier to test
+
+	// list.print_project_list();
+	list.read_file();
+	// list.print_project_list();
+
+	cout << "Press enter to continue..." << endl;
+	cin.get();
+
 	while (true) {
 		// Ask the user what they want to do
-		int choice = UserInput::get_menu_input("What would you like to do?", "1) Create new project\n2) Create new material for a project\n3) Edit projects\n4) Edit materials\n5) Add crew information for a project\n6) Search projects", 6);
+		int choice = UserInput::get_menu_input("What would you like to do?", "1) Create new project\n2) Create new material for a project\n3) Edit projects\n4) Edit materials\n5) Add crew information for a project\n6) Search projects\n7) Delete project\n8) Quit", 8);
 
 		switch (choice) {
 		case 1:
 		{
-			// Case 1 filled with Nur Main.cpp int main() content
 			Project project;
 			project = createProject();
 			list.add_node(project);
@@ -63,43 +70,6 @@ void mainMenu() {
 					createMaterial();
 				}
 			}
-
-			//string addNew = UserInput::get_string_input("Add new project? (Yes/No) : ");
-			//while (!addNew.compare("Yes")) {
-			//	project = createProject();
-			//	list.add_node(project);
-			//	addNew = UserInput::get_string_input("Add new project? (Yes/No) : ");
-			//}
-			//list.PrintProjectList();
-
-
-
-
-			string deleteProject = UserInput::get_string_input("Want to delete a project (Yes/No) : "); //did not disp the correct output
-			while (!deleteProject.compare("Yes")) {
-				list.print_project_list();
-				string del = UserInput::get_string_input("---Which project would you like to delete?---");
-
-				// boolean return on delete_no for success or throw an error?
-				try {
-					list.delete_node(del);
-				} catch (const invalid_argument& e) {
-					cout << e.what() << endl;
-				}
-				list.print_project_list();
-				deleteProject = UserInput::get_string_input("Want to delete a project (Yes/No) : ");
-			}
-
-
-
-
-			string quit = UserInput::get_string_input("Want to quit (Yes/No) : ");
-			if (!quit.compare("Yes")) {
-				//list.WriteToFile(title, summary, genre, date_release, filming_loc, language, runtime, keywords, ticket_sale, status);
-				list.write_file();
-				cout << "The data has been stored...\n";
-			}
-			// createProject();
 		}
 		break;
 		case 2:
@@ -117,6 +87,23 @@ void mainMenu() {
 			PRINT("Project Searching Coming Soon!");
 			break;
 		case 7:
+		{
+			list.print_project_list();
+			string deleteProject = UserInput::get_string_input("What project do you want to delete?");
+
+			try {
+				list.delete_node(deleteProject);
+			} catch (const invalid_argument& e) {
+				cout << e.what() << endl;
+			}
+
+			list.print_project_list();
+		}
+		break;
+		case 8:
+			PRINT("Saving data...");
+			list.write_file();
+			PRINT("Data saved!");
 			PRINT("Thank you for using TrekStar Project Management!");
 			return;
 		default:
