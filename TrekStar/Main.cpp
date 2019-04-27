@@ -11,25 +11,27 @@
 #include "Project.h"
 #include "Crew.h"
 #include "ProjectLinkedList.h"
+#include "MaterialLinkedList.h"
 
 #define PRINT(x) cout << x << endl
 
 using namespace std;
 
 // Testing functions declarations
-BluRay createBluRay();
-ComboBox createCombo();
-DoubleSidedDVD createDoubleDVD();
-SingleSidedDVD createSingleDVD();
-VHS createVHS();
+BluRay* createBluRay();
+ComboBox* createCombo();
+DoubleSidedDVD* createDoubleDVD();
+SingleSidedDVD* createSingleDVD();
+VHS* createVHS();
 void mainMenu();
-void createMaterial();
+Material* createMaterial();
 Project createProject();
 void createCrew();
 void removeProject();
 
 // ProjectList constructor called when creating this variable which calls the read_file() method and loads of saved projects into program memory
 ProjectList list;
+MaterialList Mlist; 
 
 int main() {
 	mainMenu();
@@ -55,13 +57,21 @@ void mainMenu() {
 
 				if (choice == 1) {
 					// TODO: Get this material from this function
-					createMaterial();
+				
+					Material* material;
+					material = createMaterial();
+					Mlist.add_node(&material);
 				}
 			}
 		}
 		break;
 		case 2:
-			createMaterial();
+		{
+			//Material material;
+			//material = createMaterial();
+			//Mlist.add_node(material);
+		}
+			
 			break;
 		case 3:
 			PRINT("Edit Projects Coming Soon!");
@@ -81,7 +91,8 @@ void mainMenu() {
 
 			try {
 				list.delete_node(deleteProject);
-			} catch (const invalid_argument& e) {
+			}
+			catch (const invalid_argument& e) {
 				cout << e.what() << endl;
 			}
 
@@ -91,6 +102,7 @@ void mainMenu() {
 		case 8:
 			PRINT("Saving data...");
 			list.write_file();
+			Mlist.write_file();
 			PRINT("Data saved!");
 			PRINT("Thank you for using TrekStar Project Management!");
 			return;
@@ -105,29 +117,34 @@ void remove_project() {
 }
 
 // All of the functions below are just for testing and will probably be moved elsewhere - also
-void createMaterial() {
+Material* createMaterial() {
 	// Ask user for type of material
 	int choice = UserInput::get_menu_input("What type of material would you like to add?", "1) Single-Sided DVD\n2) Double-Sided DVD\n3) BluRay\n4) Combo Boxset\n5) VHS", 5);
 
 	if (choice == 1) {
-		SingleSidedDVD new_single_sided_dvd = createSingleDVD();
-		new_single_sided_dvd.print();
-	} else if (choice == 2) {
-		DoubleSidedDVD new_double_sided_dvd = createDoubleDVD();
-		new_double_sided_dvd.print();
-	} else if (choice == 3) {
-		BluRay new_blu_ray = createBluRay();
-		new_blu_ray.print();
-	} else if (choice == 4) {
-		ComboBox new_combo = createCombo();
-		new_combo.print();
-	} else if (choice == 5) {
-		VHS new_vhs = createVHS();
-		new_vhs.print();
+		return createSingleDVD();
+		//new_single_sided_dvd.print();
 	}
+	else if (choice == 2) {
+		return createDoubleDVD();
+		//new_double_sided_dvd.print();
+	}
+	else if (choice == 3) {
+		return createBluRay();
+		//new_blu_ray.print();
+	}
+	else if (choice == 4) {
+		return createCombo();
+		//new_combo.print();
+	}
+	else if (choice == 5) {
+		return createVHS();
+		//new_vhs.print();
+	}
+
 }
 
-BluRay createBluRay() {
+BluRay* createBluRay() {
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -142,10 +159,10 @@ BluRay createBluRay() {
 	vector<string> bonus_features = UserInput::get_vector_input("Enter Bonus Features:");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return BluRay(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
+	return new BluRay(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
 }
 
-ComboBox createCombo() {
+ComboBox* createCombo() {
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -157,10 +174,10 @@ ComboBox createCombo() {
 	string packaging_material = UserInput::get_string_input("Enter Packaging Material (PLASTIC or CARDBOARD):");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return ComboBox(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
+	return new ComboBox(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 }
 
-DoubleSidedDVD createDoubleDVD() {
+DoubleSidedDVD* createDoubleDVD() {
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -177,10 +194,10 @@ DoubleSidedDVD createDoubleDVD() {
 	string side_b_content = UserInput::get_string_input("Enter Side B Content:");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return DoubleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features, side_a_content, side_b_content);
+	return new DoubleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features, side_a_content, side_b_content);
 }
 
-SingleSidedDVD createSingleDVD() {
+SingleSidedDVD* createSingleDVD() {
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -195,10 +212,10 @@ SingleSidedDVD createSingleDVD() {
 	vector<string> bonus_features = UserInput::get_vector_input("Enter Bonus Features:");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return SingleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
+	return new SingleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
 }
 
-VHS createVHS() {
+VHS* createVHS() {
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -210,15 +227,13 @@ VHS createVHS() {
 	string packaging_material = UserInput::get_string_input("Enter Packaging Material (PLASTIC or CARDBOARD):");
 
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return VHS(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
+	return new VHS(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 }
 
 /*
 void createProject() {
 	ofstream outProjectFile;
-
 	outProjectFile.open("ProjectFile.txt", ios::app);
-
 	string title = UserInput::get_string_input("Enter project title:");
 	string summary = UserInput::get_string_input("Enter project summary:");;
 	string genre = UserInput::get_string_input("Enter project genre:");
@@ -229,17 +244,13 @@ void createProject() {
 	string keywords = UserInput::get_string_input("Enter keyword:");
 	double ticket_sale = UserInput::get_double_input("Enter ticket sales:");
 	string status = UserInput::get_string_input("Enter status:");
-
 	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
 	Project newProject(1, title, summary, genre, date_release, filming_loc, language, runtime, keywords, ticket_sale, status);
-
 	if (status == "RELEASED") {
 		createMaterial();
 	}
-
 	outProjectFile << newProject.get_title() << "; " << newProject.get_summary() << "; " << newProject.get_genre() << "; " << newProject.get_date_release() << "; " << newProject.get_filming_loc() << "; " << newProject.get_language() << "; " << newProject.get_runtime() << "; " << newProject.get_keywords() << "; " << newProject.get_ticket_sale() << "; " << newProject.get_status() << ";\n" << endl;
 	cout << "The data has been stored...";
-
 	outProjectFile.close();
 	cout << "\n";
 	system("PAUSE");
