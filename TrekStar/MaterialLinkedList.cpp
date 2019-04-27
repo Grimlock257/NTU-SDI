@@ -9,37 +9,30 @@
 using namespace std;
 
 //constructor
-MaterialList::MaterialList()
-{
+MaterialList::MaterialList() {
 	head = nullptr;
 	curr = nullptr;
 	temp = nullptr;
 
 	vector<Material> all_materials = read_file();
-	for (const Material& all_materials : all_materials)
-	{
-		add_node(all_materials);
+	for (const Material& all_materials : all_materials) {
+		add_node(&all_materials);
 	}
 }
 
-void MaterialList::add_node(const Material& add_material)
-{
+void MaterialList::add_node(const Material* add_material) {
 	node_ptr new_node_ptr = new TrekStarProjectM;
-	new_node_ptr->material = add_material;
+	new_node_ptr->material = *add_material;
 	new_node_ptr->next = nullptr;
 
-	if (head != nullptr) 
-	{
+	if (head != nullptr) {
 		// Existing data in LinkedList so find end of the LinkedList and add this new node
 		curr = head;
-		while (curr->next != nullptr)
-		{
+		while (curr->next != nullptr) {
 			curr = curr->next;
 		}
 		curr->next = new_node_ptr;
-	}
-	else 
-	{
+	} else {
 		// Empty LinkedList so set head to be this new node
 		head = new_node_ptr;
 	}
@@ -64,8 +57,7 @@ void MaterialList::delete_node(const string& title) {
 			if (curr == head) {
 				head = curr->next;
 				delete curr;
-			}
-			else {
+			} else {
 				temp = curr;
 				prev->next = curr->next;
 				delete curr;
@@ -95,8 +87,7 @@ void MaterialList::print_material_list() {
 	}
 }
 
-void MaterialList::write_file() const
-{
+void MaterialList::write_file() const {
 	node_ptr write;
 	ofstream writeProjectFile;
 	writeProjectFile.open("Materials.txt", ios::out);
@@ -144,8 +135,7 @@ vector<Material> MaterialList::read_file() const {
 		if (parts.size() != 9) {
 			// TODO: Replace with throw exception
 			cout << "Incorrect amount of properties from the file. Found " << parts.size() << " instead of 8. Project could not be read." << endl;
-		}
-		else {
+		} else {
 			string title = parts[0];
 			string video_format = parts[1];
 			string audio_format = parts[2];
@@ -155,7 +145,7 @@ vector<Material> MaterialList::read_file() const {
 			string subtitles = parts[6]; // TODO: Should be int
 			string frame_aspect = parts[7];
 			string packaging_material = parts[8]; // TODO: Should be double
-			
+
 
 			all_materials.emplace_back(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 		}

@@ -4,11 +4,9 @@
 
 //#include "PackagingMaterial.h"
 
-class MaterialList
-{
+class MaterialList {
 private:
-	typedef struct TrekStarProjectM
-	{
+	typedef struct TrekStarProjectM {
 		Material material;
 		//string title;
 		//string video_format;
@@ -29,7 +27,7 @@ private:
 
 public: //funcions
 	MaterialList(); //set initial values for head,curr,temp
-	void add_node(const Material& add_material);
+	void add_node(const Material* add_material);
 	void delete_node(const string& title);
 	void print_material_list();
 	void write_file() const;

@@ -81,6 +81,9 @@
     <ClCompile Include="ProjectLinkedList.cpp">
       <Filter>Source Files\Project</Filter>
     </ClCompile>
+    <ClCompile Include="MaterialLinkedList.cpp">
+      <Filter>Source Files\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BluRay.h">
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="ProjectLinkedList.h">
       <Filter>Header Files\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialLinkedList.h">
+      <Filter>Header Files\Material</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

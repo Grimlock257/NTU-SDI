@@ -31,7 +31,7 @@ void removeProject();
 
 // ProjectList constructor called when creating this variable which calls the read_file() method and loads of saved projects into program memory
 ProjectList list;
-MaterialList Mlist; 
+MaterialList Mlist;
 
 int main() {
 	mainMenu();
@@ -57,10 +57,10 @@ void mainMenu() {
 
 				if (choice == 1) {
 					// TODO: Get this material from this function
-				
+
 					Material* material;
 					material = createMaterial();
-					Mlist.add_node(&material);
+					Mlist.add_node(material);
 				}
 			}
 		}
@@ -71,8 +71,8 @@ void mainMenu() {
 			//material = createMaterial();
 			//Mlist.add_node(material);
 		}
-			
-			break;
+
+		break;
 		case 3:
 			PRINT("Edit Projects Coming Soon!");
 		case 4:
@@ -91,8 +91,7 @@ void mainMenu() {
 
 			try {
 				list.delete_node(deleteProject);
-			}
-			catch (const invalid_argument& e) {
+			} catch (const invalid_argument& e) {
 				cout << e.what() << endl;
 			}
 
@@ -124,20 +123,16 @@ Material* createMaterial() {
 	if (choice == 1) {
 		return createSingleDVD();
 		//new_single_sided_dvd.print();
-	}
-	else if (choice == 2) {
+	} else if (choice == 2) {
 		return createDoubleDVD();
 		//new_double_sided_dvd.print();
-	}
-	else if (choice == 3) {
+	} else if (choice == 3) {
 		return createBluRay();
 		//new_blu_ray.print();
-	}
-	else if (choice == 4) {
+	} else if (choice == 4) {
 		return createCombo();
 		//new_combo.print();
-	}
-	else if (choice == 5) {
+	} else if (choice == 5) {
 		return createVHS();
 		//new_vhs.print();
 	}
