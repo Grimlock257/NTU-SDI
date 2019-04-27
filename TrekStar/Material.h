@@ -11,11 +11,13 @@ using namespace std;
 class Material {
 public:
 	// Constructor & deconstructor
+	Material();
 	Material(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material);
 	~Material();
-	
+
 	// Methods
-	virtual void print() const;
+	   //virtual void print() const;
+		void display() const;
 
 	// Getters and setters for member attributes
 	unsigned int get_id() const;
@@ -46,10 +48,10 @@ public:
 
 	string get_packaging_material() const;
 	void set_packaging_material(const string& value);
-	
+
 protected:
 	// General material information
-	const unsigned int id;
+	unsigned int id;
 	string title;
 	string video_format;
 	string audio_format;
