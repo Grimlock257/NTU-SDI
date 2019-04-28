@@ -123,6 +123,7 @@ void Project::set_crew(const vector<unsigned>& value) {
 
 void Project::display() const {
 	cout << "Project Details\n";
+	cout << "Project ID: " << id << "\n";
 	cout << "Title: " << title << "\n";
 	cout << "Summary: " << summary << "\n";
 	cout << "Genre: " << genre << "\n";

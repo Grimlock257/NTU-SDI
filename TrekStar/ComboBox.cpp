@@ -1,8 +1,8 @@
 #include "ComboBox.h"
 
 // Constructor & deconstructor
-ComboBox::ComboBox(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material)
-	: Material(id, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material) {
+ComboBox::ComboBox(unsigned int id, unsigned int project_id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material)
+	: Material(id, project_id, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material) {
 }
 
 ComboBox::~ComboBox() {
@@ -23,5 +23,5 @@ void ComboBox::print() const {
 }
 
 string ComboBox::get_savable() {
-	return "COMBOBOX;" + get_title() + ";" + get_video_format() + ";" + get_audio_format() + ";" + get_run_time() + ";" + get_language() + ";" + get_retail_price() + ";" + get_subtitles() + ";" + get_frame_aspect() + ";" + get_packaging_material() + ";\n";
+	return "COMBOBOX;" + to_string(get_id()) + ";" + get_title() + ";" + get_video_format() + ";" + get_audio_format() + ";" + get_run_time() + ";" + get_language() + ";" + get_retail_price() + ";" + get_subtitles() + ";" + get_frame_aspect() + ";" + get_packaging_material() + ";\n";
 }

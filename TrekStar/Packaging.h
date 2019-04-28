@@ -1,12 +1,11 @@
-#pragma once
-#pragma once
+/*#pragma once
 
-#include "PackagingMaterial.h"
+#include <string>
 
 class Packaging {
 public:
 	// Constructor & deconstructor
-	Packaging(PackagingMaterial packaging_material, float width, float height, float depth);
+	Packaging(string packaging_material, float width, float height, float depth);
 	~Packaging();
 
 	// Methods
@@ -23,8 +22,8 @@ public:
 	void set_depth(const float& value);
 
 private:
-	PackagingMaterial packaging_material;
+	string packaging_material;
 	float width;
 	float height;
 	float depth;
-};
+};*/

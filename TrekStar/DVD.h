@@ -10,7 +10,7 @@ using namespace std;
 class DVD : public Material {
 public:
 	// Constructor & deconstructor
-	DVD(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material, vector<string> additional_languages, vector<string> additional_subtitles, vector<string> bonus_features);
+	DVD(unsigned int id, unsigned int project_id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material, vector<string> additional_languages, vector<string> additional_subtitles, vector<string> bonus_features);
 	~DVD();
 
 	// Methods

@@ -107,9 +107,6 @@
     <ClInclude Include="Packaging.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>
-    <ClInclude Include="PackagingMaterial.h">
-      <Filter>Header Files\Material</Filter>
-    </ClInclude>
     <ClInclude Include="DVD.h">
       <Filter>Header Files\Material</Filter>
     </ClInclude>

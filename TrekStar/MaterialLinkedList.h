@@ -26,4 +26,5 @@ public: //funcions
 	vector<string> split_by_comma(const string& input_string) const; // TODO: Util?
 	vector<string> split_by_comma2(const string& input_string) const; // TODO: Util?
 	vector<Material*> read_file() const;
+	unsigned int get_next_id();
 };

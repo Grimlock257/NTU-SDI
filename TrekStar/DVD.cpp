@@ -5,8 +5,8 @@
 using namespace std;
 
 // Constructor & deconstructor
-DVD::DVD(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material, vector<string> additional_languages, vector<string> additional_subtitles, vector<string> bonus_features)
-	: Material(id, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material), additional_languages(additional_languages), additional_subtitles(additional_subtitles), bonus_features(bonus_features) {
+DVD::DVD(unsigned int id, unsigned int project_id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material, vector<string> additional_languages, vector<string> additional_subtitles, vector<string> bonus_features)
+	: Material(id, project_id, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material), additional_languages(additional_languages), additional_subtitles(additional_subtitles), bonus_features(bonus_features) {
 }
 
 DVD::~DVD() {

@@ -7,8 +7,8 @@
 Material::Material() {
 }
 
-Material::Material(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material)
-	: id(id), title(title), video_format(video_format), audio_format(audio_format), run_time(run_time), language(language), retail_price(retail_price), subtitles(subtitles), frame_aspect(frame_aspect), packaging_material(packaging_material) {
+Material::Material(unsigned int id, unsigned int project_id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material)
+	: id(id), project_id(project_id), title(title), video_format(video_format), audio_format(audio_format), run_time(run_time), language(language), retail_price(retail_price), subtitles(subtitles), frame_aspect(frame_aspect), packaging_material(packaging_material) {
 }
 
 Material::~Material() {

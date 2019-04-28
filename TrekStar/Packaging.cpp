@@ -1,11 +1,11 @@
-#include <iostream>
+/*#include <iostream>
 
 #include "Packaging.h"
 
 using namespace std;
 
 // Constructor & deconstructors
-Packaging::Packaging(PackagingMaterial packaging_material, float width, float height, float depth) : packaging_material(packaging_material), width(width), height(height), depth(depth) {
+Packaging::Packaging(string packaging_material, float width, float height, float depth) : packaging_material(packaging_material), width(width), height(height), depth(depth) {
 }
 
 Packaging::~Packaging() {
@@ -43,3 +43,4 @@ float Packaging::get_depth() const {
 void Packaging::set_depth(const float & value) {
 	this->depth = value;
 }
+*/

@@ -5,8 +5,8 @@
 using namespace std;
 
 // Constructor & deconstructor
-DoubleSidedDVD::DoubleSidedDVD(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material, vector<string> additional_languages, vector<string> additional_subtitles, vector<string> bonus_features, string side_a_content, string side_b_content)
-	: DVD(id, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features), side_a_content(side_a_content), side_b_content(side_b_content) {
+DoubleSidedDVD::DoubleSidedDVD(unsigned int id, unsigned int project_id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material, vector<string> additional_languages, vector<string> additional_subtitles, vector<string> bonus_features, string side_a_content, string side_b_content)
+	: DVD(id, project_id, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features), side_a_content(side_a_content), side_b_content(side_b_content) {
 }
 
 DoubleSidedDVD::~DoubleSidedDVD() {
@@ -49,5 +49,5 @@ void DoubleSidedDVD::set_side_b(const string& value) {
 }
 
 string DoubleSidedDVD::get_savable() {
-	return "DOUBLESIDEDDVD;" + get_title() + ";" + get_video_format() + ";" + get_audio_format() + ";" + get_run_time() + ";" + get_language() + ";" + get_retail_price() + ";" + get_subtitles() + ";" + get_frame_aspect() + ";" + get_packaging_material() + ";" + vector_to_string(get_additional_languages()) + ";" + vector_to_string(get_additional_subtitles()) + ";" + vector_to_string(get_bonus_features()) + ";" + get_side_a() + ";" + get_side_b() + ";\n";;
+	return "DOUBLESIDEDDVD;" + to_string(get_id()) + ";" + get_title() + ";" + get_video_format() + ";" + get_audio_format() + ";" + get_run_time() + ";" + get_language() + ";" + get_retail_price() + ";" + get_subtitles() + ";" + get_frame_aspect() + ";" + get_packaging_material() + ";" + vector_to_string(get_additional_languages()) + ";" + vector_to_string(get_additional_subtitles()) + ";" + vector_to_string(get_bonus_features()) + ";" + get_side_a() + ";" + get_side_b() + ";\n";;
 }

@@ -2,7 +2,6 @@
 
 #include <string>
 
-#include "PackagingMaterial.h"
 #include "UserInput.h"
 #include "Util.h"
 
@@ -12,11 +11,12 @@ class Material {
 public:
 	// Constructor & deconstructor
 	Material();
-	Material(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material);
+	Material(unsigned int id, unsigned int project_id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material);
 	~Material();
 
 	// Getters and setters for member attributes
 	unsigned int get_id() const;
+	unsigned int get_project_id() const;
 
 	string get_title() const;
 	void set_title(const string& value);
@@ -52,6 +52,7 @@ public:
 protected:
 	// General material information
 	unsigned int id;
+	unsigned int project_id;
 	string title;
 	string video_format;
 	string audio_format;

@@ -17,7 +17,6 @@
 
 using namespace std;
 
-// Testing functions declarations
 BluRay* createBluRay();
 ComboBox* createCombo();
 DoubleSidedDVD* createDoubleDVD();
@@ -27,11 +26,10 @@ void mainMenu();
 Material* createMaterial();
 Project createProject();
 void createCrew();
-void removeProject();
 
 // ProjectList constructor called when creating this variable which calls the read_file() method and loads of saved projects into program memory
 ProjectList list;
-MaterialList Mlist; 
+MaterialList Mlist;
 
 int main() {
 	mainMenu();
@@ -56,33 +54,29 @@ void mainMenu() {
 				int choice = UserInput::get_menu_input("Do you want to add a material for this project?", "1) Yes\n2) No", 2);
 
 				if (choice == 1) {
-					// TODO: Get this material from this function
-				
 					Material* material;
 					material = createMaterial();
 					Mlist.add_node(material);
-					
+
 				}
 				createCrew();
-			}
-			else if (project.get_status() == "Now Playing") {
+			} else if (project.get_status() == "Now Playing") {
 				int numWeek = UserInput::get_integer_input("Enter number of weeks for box office to add weekly figures in £: ");
 				double *boxOffice = new double[numWeek];
-				for(int i=1;i<=numWeek;i++)
-				{
-					cout << "Week " << i << " = " << boxOffice[i] <<   endl;
+
+				for (int i = 1; i <= numWeek; i++) {
+					cout << "Week " << i << " = " << boxOffice[i] << endl;
 				}
 			}
 		}
 		break;
 		case 2:
 		{
-			//Material material;
-			//material = createMaterial();
-			//Mlist.add_node(material);
+			Material* material;
+			material = createMaterial();
+			Mlist.add_node(material);
 		}
-			
-			break;
+		break;
 		case 3:
 		{
 			list.read_file();
@@ -90,28 +84,40 @@ void mainMenu() {
 			list.print_project_list();
 			int PsearchID = UserInput::get_integer_input("Enter project ID to edit project?");
 			list.update_node(PsearchID, projectSearch);
-
 		}
 		break;
-			
+
 
 		case 4:
 		{
-			PRINT("Edit Materials Coming Soon!");
 			Mlist.read_file();
 			Material* materialSearch;
 			Mlist.print_material_list();
 			int MsearchID = UserInput::get_integer_input("Enter material ID to edit material?");
 			Mlist.update_node(MsearchID);
 		}
-			
-			break;
+
+		break;
 		case 5:
 			PRINT("Add Crew Information Coming Soon!");
 			break;
 		case 6:
-			PRINT("Project Searching Coming Soon!");
-			break;
+		{
+			string project_title = UserInput::get_string_input("Enter title of project you want to find:");
+			vector<Project> foundProjects = list.search_by_title(project_title);
+
+			if (foundProjects.size() < 1) {
+				cout << "No project was found with the title '" << project_title << "'" << endl;
+			} else {
+				cout << "Found the following projects:" << endl;
+
+				for (Project project : foundProjects) {
+					project.display();
+					cout << endl;
+				}
+			}
+		}
+		break;
 		case 7:
 		{
 			list.print_project_list();
@@ -119,8 +125,7 @@ void mainMenu() {
 
 			try {
 				list.delete_node(deleteProject);
-			}
-			catch (const invalid_argument& e) {
+			} catch (const invalid_argument& e) {
 				cout << e.what() << endl;
 			}
 
@@ -131,9 +136,6 @@ void mainMenu() {
 			PRINT("Saving data...");
 			list.write_file();
 			Mlist.write_file();
-			
-			//testing
-			
 			PRINT("Data saved!");
 			PRINT("Thank you for using TrekStar Project Management!");
 			return;
@@ -143,10 +145,6 @@ void mainMenu() {
 	}
 }
 
-void remove_project() {
-
-}
-
 // All of the functions below are just for testing and will probably be moved elsewhere - also
 Material* createMaterial() {
 	// Ask user for type of material
@@ -154,28 +152,19 @@ Material* createMaterial() {
 
 	if (choice == 1) {
 		return createSingleDVD();
-		//new_single_sided_dvd.print();
-	}
-	else if (choice == 2) {
+	} else if (choice == 2) {
 		return createDoubleDVD();
-		//new_double_sided_dvd.print();
-	}
-	else if (choice == 3) {
+	} else if (choice == 3) {
 		return createBluRay();
-		//new_blu_ray.print();
-	}
-	else if (choice == 4) {
+	} else if (choice == 4) {
 		return createCombo();
-		//new_combo.print();
-	}
-	else if (choice == 5) {
+	} else if (choice == 5) {
 		return createVHS();
-		//new_vhs.print();
 	}
-
 }
 
 BluRay* createBluRay() {
+	unsigned int material_id = Mlist.get_next_id();
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -189,11 +178,11 @@ BluRay* createBluRay() {
 	vector<string> additional_subtitles = UserInput::get_vector_input("Enter Additional Subtitles:");
 	vector<string> bonus_features = UserInput::get_vector_input("Enter Bonus Features:");
 
-	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return new BluRay(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
+	return new BluRay(material_id, 1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
 }
 
 ComboBox* createCombo() {
+	unsigned int material_id = Mlist.get_next_id();
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -204,11 +193,11 @@ ComboBox* createCombo() {
 	string frame_aspect = UserInput::get_string_input("Enter Frame Aspect:");
 	string packaging_material = UserInput::get_string_input("Enter Packaging Material (PLASTIC or CARDBOARD):");
 
-	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return new ComboBox(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
+	return new ComboBox(material_id, 1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 }
 
 DoubleSidedDVD* createDoubleDVD() {
+	unsigned int material_id = Mlist.get_next_id();
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -224,11 +213,11 @@ DoubleSidedDVD* createDoubleDVD() {
 	string side_a_content = UserInput::get_string_input("Enter Side A Content:");
 	string side_b_content = UserInput::get_string_input("Enter Side B Content:");
 
-	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return new DoubleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features, side_a_content, side_b_content);
+	return new DoubleSidedDVD(material_id, 1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features, side_a_content, side_b_content);
 }
 
 SingleSidedDVD* createSingleDVD() {
+	unsigned int material_id = Mlist.get_next_id();
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -242,11 +231,11 @@ SingleSidedDVD* createSingleDVD() {
 	vector<string> additional_subtitles = UserInput::get_vector_input("Enter Additional Subtitles:");
 	vector<string> bonus_features = UserInput::get_vector_input("Enter Bonus Features:");
 
-	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return new SingleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
+	return new SingleSidedDVD(material_id, 1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
 }
 
 VHS* createVHS() {
+	unsigned int material_id = Mlist.get_next_id();
 	string title = UserInput::get_string_input("Enter title:");
 	string video_format = UserInput::get_string_input("Enter Video Format:");
 	string audio_format = UserInput::get_string_input("Enter Audio Format:");
@@ -257,38 +246,11 @@ VHS* createVHS() {
 	string frame_aspect = UserInput::get_string_input("Enter Frame Aspect:");
 	string packaging_material = UserInput::get_string_input("Enter Packaging Material (PLASTIC or CARDBOARD):");
 
-	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return new VHS(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
+	return new VHS(material_id, 1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 }
-
-/*
-void createProject() {
-	ofstream outProjectFile;
-	outProjectFile.open("ProjectFile.txt", ios::app);
-	string title = UserInput::get_string_input("Enter project title:");
-	string summary = UserInput::get_string_input("Enter project summary:");;
-	string genre = UserInput::get_string_input("Enter project genre:");
-	string date_release = UserInput::get_string_input("Enter release date:");
-	string filming_loc = UserInput::get_string_input("Enter filming location:");
-	string language = UserInput::get_string_input("Enter language:");
-	int runtime = UserInput::get_integer_input("Enter runtime:");
-	string keywords = UserInput::get_string_input("Enter keyword:");
-	double ticket_sale = UserInput::get_double_input("Enter ticket sales:");
-	string status = UserInput::get_string_input("Enter status:");
-	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	Project newProject(1, title, summary, genre, date_release, filming_loc, language, runtime, keywords, ticket_sale, status);
-	if (status == "RELEASED") {
-		createMaterial();
-	}
-	outProjectFile << newProject.get_title() << "; " << newProject.get_summary() << "; " << newProject.get_genre() << "; " << newProject.get_date_release() << "; " << newProject.get_filming_loc() << "; " << newProject.get_language() << "; " << newProject.get_runtime() << "; " << newProject.get_keywords() << "; " << newProject.get_ticket_sale() << "; " << newProject.get_status() << ";\n" << endl;
-	cout << "The data has been stored...";
-	outProjectFile.close();
-	cout << "\n";
-	system("PAUSE");
-}
-*/
 
 Project createProject() {
+	unsigned int projectID = list.get_next_id();
 	string projectTitle = UserInput::get_string_input("Enter title:");
 	string projectSummary = UserInput::get_string_input("Enter summary:");
 	string projectGenre = UserInput::get_string_input("Enter genre:");
@@ -300,8 +262,7 @@ Project createProject() {
 	double projectTicketSale = UserInput::get_double_input("Enter ticket sales:");
 	string projectStatus = UserInput::get_string_input("Enter status (Unreleased / Now Playing / Released) :");
 
-	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
-	return Project(1, projectTitle, projectSummary, projectGenre, projectDateRelease, projectFilmingLoc, projectLanguage, projectRuntime, projectKeywords, projectTicketSale, projectStatus);
+	return Project(projectID, projectTitle, projectSummary, projectGenre, projectDateRelease, projectFilmingLoc, projectLanguage, projectRuntime, projectKeywords, projectTicketSale, projectStatus);
 }
 
 void createCrew() {
@@ -319,7 +280,6 @@ void createCrew() {
 
 	string *cast = new string[numCast];
 
-	// TOOD 1st parameter 1 will be auto generated - probably have a text file store next available ID number?
 	Crew crew(1, producer, director, writer, numCast, editor, prodDesign, setDeco, customeDesign);
 
 	for (int i = 0; i < numCast; i++) {

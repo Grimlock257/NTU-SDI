@@ -140,7 +140,6 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialLinkedList.h" />
     <ClInclude Include="Packaging.h" />
-    <ClInclude Include="PackagingMaterial.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="ProjectLinkedList.h" />
     <ClInclude Include="SingleSidedDVD.h" />
