@@ -31,7 +31,7 @@ void removeProject();
 
 // ProjectList constructor called when creating this variable which calls the read_file() method and loads of saved projects into program memory
 ProjectList list;
-MaterialList Mlist;
+MaterialList Mlist; 
 
 int main() {
 	mainMenu();
@@ -57,19 +57,22 @@ void mainMenu() {
 
 				if (choice == 1) {
 					// TODO: Get this material from this function
-
+				
 					Material* material;
 					material = createMaterial();
 					Mlist.add_node(material);
+					
 				}
-			}/* else if (project.get_status() == "Now Playting") {
+				createCrew();
+			}
+			else if (project.get_status() == "Now Playing") {
 				int numWeek = UserInput::get_integer_input("Enter number of weeks for box office to add weekly figures in £: ");
-				double* boxOffice = new double[numWeek];
-
-				for (int i = 1; i <= numWeek; i++) {
-					cout << "Week " << i << " = " << boxOffice[i] << endl;
+				double *boxOffice = new double[numWeek];
+				for(int i=1;i<=numWeek;i++)
+				{
+					cout << "Week " << i << " = " << boxOffice[i] <<   endl;
 				}
-			}*/
+			}
 		}
 		break;
 		case 2:
@@ -78,12 +81,30 @@ void mainMenu() {
 			//material = createMaterial();
 			//Mlist.add_node(material);
 		}
-
-		break;
+			
+			break;
 		case 3:
-			PRINT("Edit Projects Coming Soon!");
+		{
+			list.read_file();
+			Project projectSearch;
+			list.print_project_list();
+			int PsearchID = UserInput::get_integer_input("Enter project ID to edit project?");
+			list.update_node(PsearchID, projectSearch);
+
+		}
+		break;
+			
+
 		case 4:
+		{
 			PRINT("Edit Materials Coming Soon!");
+			Mlist.read_file();
+			Material* materialSearch;
+			Mlist.print_material_list();
+			int MsearchID = UserInput::get_integer_input("Enter material ID to edit material?");
+			Mlist.update_node(MsearchID);
+		}
+			
 			break;
 		case 5:
 			PRINT("Add Crew Information Coming Soon!");
@@ -94,11 +115,12 @@ void mainMenu() {
 		case 7:
 		{
 			list.print_project_list();
-			string deleteProject = UserInput::get_string_input("What project do you want to delete?");
+			string deleteProject = UserInput::get_string_input("Enter the title of the project you want to delete: ");
 
 			try {
 				list.delete_node(deleteProject);
-			} catch (const invalid_argument& e) {
+			}
+			catch (const invalid_argument& e) {
 				cout << e.what() << endl;
 			}
 
@@ -109,6 +131,9 @@ void mainMenu() {
 			PRINT("Saving data...");
 			list.write_file();
 			Mlist.write_file();
+			
+			//testing
+			
 			PRINT("Data saved!");
 			PRINT("Thank you for using TrekStar Project Management!");
 			return;
@@ -130,16 +155,20 @@ Material* createMaterial() {
 	if (choice == 1) {
 		return createSingleDVD();
 		//new_single_sided_dvd.print();
-	} else if (choice == 2) {
+	}
+	else if (choice == 2) {
 		return createDoubleDVD();
 		//new_double_sided_dvd.print();
-	} else if (choice == 3) {
+	}
+	else if (choice == 3) {
 		return createBluRay();
 		//new_blu_ray.print();
-	} else if (choice == 4) {
+	}
+	else if (choice == 4) {
 		return createCombo();
 		//new_combo.print();
-	} else if (choice == 5) {
+	}
+	else if (choice == 5) {
 		return createVHS();
 		//new_vhs.print();
 	}

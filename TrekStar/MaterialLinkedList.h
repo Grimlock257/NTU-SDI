@@ -21,6 +21,7 @@ public: //funcions
 	void delete_node(const string& title);
 	void print_material_list();
 	void write_file() const;
+	void update_node(int id);
 	Material* search_by_title(const string& title);
 	vector<string> split_by_comma(const string& input_string) const; // TODO: Util?
 	vector<string> split_by_comma2(const string& input_string) const; // TODO: Util?

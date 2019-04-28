@@ -37,7 +37,8 @@ void MaterialList::add_node(Material* add_material) {
 			curr = curr->next;
 		}
 		curr->next = new_node_ptr;
-	} else {
+	}
+	else {
 		// Empty LinkedList so set head to be this new node
 		head = new_node_ptr;
 	}
@@ -62,7 +63,8 @@ void MaterialList::delete_node(const string& title) {
 			if (curr == head) {
 				head = curr->next;
 				delete curr;
-			} else {
+			}
+			else {
 				temp = curr;
 				prev->next = curr->next;
 				delete curr;
@@ -110,6 +112,53 @@ void MaterialList::write_file() const {
 	writeProjectFile.close();
 }
 
+void MaterialList::update_node(int id)
+{
+	curr = head;
+	int idSearch = curr->material->get_id();
+	cout << "test" << endl;
+	while (curr != nullptr)
+	{
+
+		if (idSearch == id)
+		{
+			string temp;
+		
+			curr->material->print();
+
+			//id = curr->project.get_projectId;
+			cout << "Enter updated project title: ";
+			cin >> temp;
+			curr->material->set_title(temp);
+			cout << "Enter updated material video format: ";
+			cin >> temp;
+			curr->material->set_video_format(temp);
+			cout << "Enter updated material audio format: ";
+			cin >> temp;
+			curr->material->set_audio_format(temp);
+			cout << "Enter updated material run time: ";
+			cin >> temp;
+			curr->material->set_run_time(temp);
+			cout << "Enter updated material language: ";
+			cin >> temp;
+			curr->material->set_language(temp);
+			cout << "Enter updated material retail price: ";
+			cin >> temp;
+			curr->material->set_retail_price(temp);
+			cout << "Enter updated material substitle: ";
+			cin >> temp;
+			curr->material->set_subtitles(temp);
+			cout << "Enter updated material frame aspect: ";
+			cin >> temp;
+			curr->material->set_frame_aspect(temp);
+			cout << "Enter updated material packaging material [PLASTIC / CARDBOARD] : ";
+			cin >> temp;
+			curr->material->set_packaging_material(temp);
+		}
+		curr = curr->next;
+	}
+}
+
 
 vector<string> MaterialList::split_by_comma(const string& input_string) const {
 	vector<string> tokens;
@@ -154,7 +203,8 @@ vector<Material*> MaterialList::read_file() const {
 		if (parts.size() < 10) {
 			// TODO: Replace with throw exception
 			cout << "Incorrect amount of properties from the file. Found " << parts.size() << " instead of the minimum 10. Material could not be read." << endl;
-		} else {
+		}
+		else {
 			string material_type = parts[0];
 			string title = parts[1];
 			string video_format = parts[2];
@@ -174,7 +224,8 @@ vector<Material*> MaterialList::read_file() const {
 
 				SingleSidedDVD* newSingleSidedDVD = new SingleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features);
 				all_materials.push_back(newSingleSidedDVD);
-			} else if (material_type == "DOUBLESIDEDDVD") {
+			}
+			else if (material_type == "DOUBLESIDEDDVD") {
 				vector<string> additional_languages = split_by_comma2(parts[10]);
 				vector<string> additional_subtitles = split_by_comma2(parts[11]);
 				vector<string> bonus_features = split_by_comma2(parts[12]);
@@ -183,13 +234,16 @@ vector<Material*> MaterialList::read_file() const {
 
 				DoubleSidedDVD* newDoubleSidedDVD = new DoubleSidedDVD(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material, additional_languages, additional_subtitles, bonus_features, side_a_content, side_b_content);
 				all_materials.push_back(newDoubleSidedDVD);
-			} else if (material_type == "COMBOBOX") {
+			}
+			else if (material_type == "COMBOBOX") {
 				ComboBox* newComboBox = new ComboBox(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 				all_materials.push_back(newComboBox);
-			} else if (material_type == "VHS") {
+			}
+			else if (material_type == "VHS") {
 				VHS* newVHS = new VHS(1, title, video_format, audio_format, run_time, language, retail_price, subtitles, frame_aspect, packaging_material);
 				all_materials.push_back(newVHS);
-			} else if (material_type == "BLURAY") {
+			}
+			else if (material_type == "BLURAY") {
 				vector<string> additional_languages = split_by_comma2(parts[10]);
 				vector<string> additional_subtitles = split_by_comma2(parts[11]);
 				vector<string> bonus_features = split_by_comma2(parts[12]);
