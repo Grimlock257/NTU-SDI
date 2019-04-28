@@ -23,6 +23,7 @@ public:
 	void delete_node(const string& title);
 	void print_project_list();
 	void write_file() const;
+	void update_node(int id,const Project& update_project);
 	Project search_by_title(const string& title);
 	vector<string> search_by_actor(const string& actor_name);
 	vector<string> split_by_comma(const string& input_string) const; // TODO: Util?

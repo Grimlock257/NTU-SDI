@@ -14,6 +14,7 @@ ProjectList::ProjectList() {
 	curr = nullptr;
 	temp = nullptr;
 
+	
 	vector<Project> all_projects = read_file();
 
 	for (const Project& all_project : all_projects) {
@@ -34,7 +35,8 @@ void ProjectList::add_node(const Project& add_project) {
 		}
 
 		curr->next = new_node_ptr;
-	} else {
+	}
+	else {
 		// Empty LinkedList so set head to be this new node
 		head = new_node_ptr;
 	}
@@ -59,7 +61,8 @@ void ProjectList::delete_node(const string& title) {
 			if (curr == head) {
 				head = curr->next;
 				delete curr;
-			} else {
+			}
+			else {
 				temp = curr;
 				prev->next = curr->next;
 				delete curr;
@@ -106,6 +109,51 @@ void ProjectList::write_file() const {
 	writeProjectFile.close();
 }
 
+void ProjectList::update_node(int id, const Project& update_project)
+{
+	curr = head;
+	int idSearch = curr->project.get_projectId();
+	
+	while (curr != nullptr)
+	{
+
+		if (idSearch == id)
+		{
+			string temp;
+			int tempI;
+			curr->project.display();
+
+			//id = curr->project.get_projectId;
+			cout << "Enter updated project title: ";
+			cin >> temp;
+			curr->project.set_title(temp);
+			cout << "Enter updated project summary: ";
+			cin >> temp;
+			curr->project.set_summary(temp);
+			cout << "Enter updated project genre: ";
+			cin >> temp;
+			curr->project.set_genre(temp);
+			cout << "Enter updated project date release: ";
+			cin >> temp;
+			curr->project.set_date_release(temp);
+			cout << "Enter updated project filming location: ";
+			cin >> temp;
+			curr->project.set_filming_loc(temp);
+			cout << "Enter updated project language: ";
+			cin >> temp;
+			curr->project.set_language(temp);
+			cout << "Enter updated project runtime: ";
+			cin >> tempI;
+			curr->project.set_runtime(tempI);
+			cout << "Enter updated project keywords: ";
+			cin >> temp;
+			curr->project.set_keywords(temp);
+		}
+		curr = curr->next;
+	}
+	//return;
+}
+
 vector<string> ProjectList::split_by_comma(const string& input_string) const {
 	vector<string> tokens;
 	string token;
@@ -136,7 +184,8 @@ vector<Project> ProjectList::read_file() const {
 		if (parts.size() != 10) {
 			// TODO: Replace with throw exception
 			cout << "Incorrect amount of properties from the file. Found " << parts.size() << " instead of 9. Project could not be read." << endl;
-		} else {
+		}
+		else {
 			string title = parts[0];
 			string summary = parts[1];
 			string genre = parts[2];
@@ -148,9 +197,9 @@ vector<Project> ProjectList::read_file() const {
 			string ticket_sale = parts[8]; // TODO: Should be double
 			string status = parts[9];
 
-			// TODO: ID property
 			all_projects.emplace_back(1, title, summary, genre, date_release, filming_loc, language, 1, keywords, 1, status);
 		}
+		
 	}
 
 	return all_projects;
@@ -177,22 +226,22 @@ Project ProjectList::search_by_title(const string& title) {
 }
 
 // Untested
-vector<string> ProjectList::search_by_actor(const string& actor_name) {
-	vector<string> project_titles;
-	curr = head;
-
-	// While current node isn't a nullptr
-	while (curr != nullptr) {
-		vector<unsigned int> project_crew = curr->project.get_crew();
-
-		for (int i = 0; i < project_crew.size(); i++) {
-			if (project_crew[i] == 1) { // TODO: Change this to == actor_name
-				project_titles.push_back(curr->project.get_title());
-			}
-		}
-
-		curr = curr->next;
-	}
-
-	return project_titles;
-}
+//vector<string> ProjectList::search_by_actor(const string& actor_name) {
+//	vector<string> project_titles;
+//	curr = head;
+//
+//	// While current node isn't a nullptr
+//	while (curr != nullptr) {
+//		vector<unsigned int> project_crew = curr->project.get_crew();
+//
+//		for (int i = 0; i < project_crew.size(); i++) {
+//			if (project_crew[i] == 1) { // TODO: Change this to == actor_name
+//				project_titles.push_back(curr->project.get_title());
+//			}
+//		}
+//
+//		curr = curr->next;
+//	}
+//
+//	return project_titles;
+//}
