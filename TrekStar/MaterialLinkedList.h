@@ -7,17 +7,7 @@
 class MaterialList {
 private:
 	typedef struct TrekStarProjectM {
-		Material material;
-		//string title;
-		//string video_format;
-		//string audio_format;
-		//string run_time;
-		//string language;
-		//string retail_price;
-		//string subtitles;
-		//string frame_aspect;
-		////PackagingMaterial packaging_material;
-
+		Material* material;
 		TrekStarProjectM *next;
 	}*node_ptr;
 
@@ -27,13 +17,12 @@ private:
 
 public: //funcions
 	MaterialList(); //set initial values for head,curr,temp
-	void add_node(const Material* add_material);
+	void add_node(Material* add_material);
 	void delete_node(const string& title);
 	void print_material_list();
 	void write_file() const;
-	Material search_by_title(const string& title);
-	//vector<string> search_by_actor(const string& actor_name);
+	Material* search_by_title(const string& title);
 	vector<string> split_by_comma(const string& input_string) const; // TODO: Util?
-	vector<Material> read_file() const;
-
+	vector<string> split_by_comma2(const string& input_string) const; // TODO: Util?
+	vector<Material*> read_file() const;
 };

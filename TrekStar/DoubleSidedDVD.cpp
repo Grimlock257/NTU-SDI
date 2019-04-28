@@ -47,3 +47,7 @@ string DoubleSidedDVD::get_side_b() const {
 void DoubleSidedDVD::set_side_b(const string& value) {
 	this->side_b_content = value;
 }
+
+string DoubleSidedDVD::get_savable() {
+	return "DOUBLESIDEDDVD;" + get_title() + ";" + get_video_format() + ";" + get_audio_format() + ";" + get_run_time() + ";" + get_language() + ";" + get_retail_price() + ";" + get_subtitles() + ";" + get_frame_aspect() + ";" + get_packaging_material() + ";" + vector_to_string(get_additional_languages()) + ";" + vector_to_string(get_additional_subtitles()) + ";" + vector_to_string(get_bonus_features()) + ";" + get_side_a() + ";" + get_side_b() + ";\n";;
+}

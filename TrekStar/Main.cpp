@@ -62,7 +62,14 @@ void mainMenu() {
 					material = createMaterial();
 					Mlist.add_node(material);
 				}
-			}
+			}/* else if (project.get_status() == "Now Playting") {
+				int numWeek = UserInput::get_integer_input("Enter number of weeks for box office to add weekly figures in £: ");
+				double* boxOffice = new double[numWeek];
+
+				for (int i = 1; i <= numWeek; i++) {
+					cout << "Week " << i << " = " << boxOffice[i] << endl;
+				}
+			}*/
 		}
 		break;
 		case 2:

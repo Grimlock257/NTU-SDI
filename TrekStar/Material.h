@@ -15,10 +15,6 @@ public:
 	Material(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material);
 	~Material();
 
-	// Methods
-	   //virtual void print() const;
-		void display() const;
-
 	// Getters and setters for member attributes
 	unsigned int get_id() const;
 
@@ -48,6 +44,10 @@ public:
 
 	string get_packaging_material() const;
 	void set_packaging_material(const string& value);
+
+	// Methods
+	virtual void print() const = 0;
+	virtual string get_savable() = 0;
 
 protected:
 	// General material information

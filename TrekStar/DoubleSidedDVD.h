@@ -12,6 +12,7 @@ public:
 
 	// Methods
 	virtual void print() const;
+	virtual string get_savable();
 
 	// Getters and setters for member attributes
 	string get_side_a() const;

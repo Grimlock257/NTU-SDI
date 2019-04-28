@@ -4,28 +4,14 @@
 
 // Constructor & deconstructor
 
-Material::Material() 
-{}
+Material::Material() {
+}
 
 Material::Material(unsigned int id, string title, string video_format, string audio_format, string run_time, string language, string retail_price, string subtitles, string frame_aspect, string packaging_material)
 	: id(id), title(title), video_format(video_format), audio_format(audio_format), run_time(run_time), language(language), retail_price(retail_price), subtitles(subtitles), frame_aspect(frame_aspect), packaging_material(packaging_material) {
 }
 
 Material::~Material() {
-}
-
-// Methods
-void Material::display() const {
-	cout << "Material Details\n";
-	cout << "Title: " << title << "\n";
-	cout << "Video Format: " << video_format << "\n";
-	cout << "Audio Format: " << audio_format << "\n";
-	cout << "Run Time: " << run_time << "\n";
-	cout << "Default Language: " << language << "\n";
-	cout << "Retail Price: " << retail_price << "\n";
-	cout << "Default Subtitles: " << subtitles << "\n";
-	cout << "Aspect Ratio: " << frame_aspect << "\n";
-	cout << "Packaging Material: " << packaging_material << "\n";
 }
 
 // Getters and setters for member attributes

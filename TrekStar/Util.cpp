@@ -9,3 +9,17 @@ ostream& operator<< (ostream& out, const vector<string>& v) {
 	}
 	return out;
 }
+
+string vector_to_string(const vector<string>& input) {
+	string output;
+
+	for (int i = 0; i < input.size(); i++) {
+		output += input[i];
+
+		if ((i + 1) != input.size()) {
+			output += "|";
+		}
+	}
+
+	return output;
+}

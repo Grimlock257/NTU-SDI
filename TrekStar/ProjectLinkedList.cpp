@@ -148,9 +148,9 @@ vector<Project> ProjectList::read_file() const {
 			string ticket_sale = parts[8]; // TODO: Should be double
 			string status = parts[9];
 
+			// TODO: ID property
 			all_projects.emplace_back(1, title, summary, genre, date_release, filming_loc, language, 1, keywords, 1, status);
 		}
-		cout << endl;
 	}
 
 	return all_projects;

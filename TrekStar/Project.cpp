@@ -10,7 +10,8 @@ Project::Project() {
 }
 
 Project::Project(unsigned int projectId, string projectTitle, string projectSummary, string projectGenre, string projectDateRelease, string projectFilmingLoc, string projectLanguage, int projectRuntime, string projectKeywords, double projectTicketSale, string projectStatus)
-	: id(projectId),
+	:
+	id(projectId),
 	title(projectTitle),
 	summary(projectSummary),
 	genre(projectGenre),
